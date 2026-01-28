@@ -1,12 +1,1192 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="utf-8">
-  <title>Titre de la page</title>
-  <link rel="stylesheet" href="style.css">
-  <script src="script.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mini Jeux de Con 🎮</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Comic Sans MS', cursive;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1, #f9ca24);
+            background-size: 400% 400%;
+            animation: gradient 15s ease infinite;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+        }
+
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        h1 {
+            color: white;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.3);
+            margin: 20px 0;
+            font-size: 2.5em;
+        }
+
+        .menu {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            max-width: 1200px;
+            width: 100%;
+            margin-bottom: 20px;
+        }
+
+        .game-card {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+            cursor: pointer;
+            transition: transform 0.3s;
+            text-align: center;
+        }
+
+        .game-card:hover {
+            transform: scale(1.05);
+        }
+
+        .game-card h2 {
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .game-card p {
+            color: #666;
+            font-size: 0.9em;
+        }
+
+        .game-container {
+            display: none;
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            max-width: 600px;
+            width: 100%;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+        }
+
+        .game-container.active {
+            display: block;
+        }
+
+        button {
+            background: #ff6b6b;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 1em;
+            cursor: pointer;
+            margin: 10px 5px;
+            transition: background 0.3s;
+            font-family: 'Comic Sans MS', cursive;
+        }
+
+        button:hover {
+            background: #ee5a52;
+        }
+
+        .back-btn {
+            background: #95a5a6;
+        }
+
+        .back-btn:hover {
+            background: #7f8c8d;
+        }
+
+        #clicker-score, #reaction-result, #memory-status, #spam-counter {
+            font-size: 2em;
+            color: #333;
+            margin: 20px 0;
+            font-weight: bold;
+        }
+
+        #click-zone {
+            width: 200px;
+            height: 200px;
+            background: #4ecdc4;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 20px auto;
+            cursor: pointer;
+            transition: transform 0.1s;
+            font-size: 3em;
+        }
+
+        #click-zone:active {
+            transform: scale(0.95);
+        }
+
+        #reaction-box {
+            width: 100%;
+            height: 200px;
+            background: #e74c3c;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 2em;
+            color: white;
+            margin: 20px 0;
+        }
+
+        #reaction-box.green {
+            background: #2ecc71;
+        }
+
+        .memory-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            max-width: 400px;
+            margin: 20px auto;
+        }
+
+        .memory-card {
+            aspect-ratio: 1;
+            background: #3498db;
+            border-radius: 8px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2em;
+            transition: transform 0.3s;
+        }
+
+        .memory-card:hover {
+            transform: scale(1.05);
+        }
+
+        .memory-card.flipped {
+            background: white;
+        }
+
+        .memory-card.matched {
+            background: #2ecc71;
+            cursor: default;
+        }
+
+        #spam-input {
+            width: 100%;
+            padding: 15px;
+            font-size: 1.2em;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            margin: 20px 0;
+            font-family: 'Comic Sans MS', cursive;
+        }
+
+        /* Morpion */
+        .tictactoe-board {
+            display: grid;
+            grid-template-columns: repeat(3, 100px);
+            gap: 5px;
+            margin: 20px auto;
+            width: fit-content;
+        }
+
+        .tictactoe-cell {
+            width: 100px;
+            height: 100px;
+            background: #ecf0f1;
+            border: 3px solid #34495e;
+            border-radius: 8px;
+            font-size: 3em;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .tictactoe-cell:hover:not(.taken) {
+            background: #bdc3c7;
+        }
+
+        .tictactoe-cell.taken {
+            cursor: default;
+        }
+
+        /* Échecs */
+        .chess-board {
+            display: grid;
+            grid-template-columns: repeat(8, 50px);
+            gap: 0;
+            margin: 20px auto;
+            border: 3px solid #34495e;
+            width: fit-content;
+        }
+
+        .chess-cell {
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2em;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .chess-cell.white {
+            background: #f0d9b5;
+        }
+
+        .chess-cell.black {
+            background: #b58863;
+        }
+
+        .chess-cell.selected {
+            background: #7fc97f !important;
+        }
+
+        .chess-cell.possible-move {
+            background: #ffd700 !important;
+        }
+
+        /* Dames */
+        .checkers-board {
+            display: grid;
+            grid-template-columns: repeat(8, 60px);
+            gap: 0;
+            margin: 20px auto;
+            border: 3px solid #34495e;
+            width: fit-content;
+        }
+
+        .checkers-cell {
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5em;
+            cursor: pointer;
+        }
+
+        .checkers-cell.white {
+            background: #f0d9b5;
+        }
+
+        .checkers-cell.black {
+            background: #769656;
+        }
+
+        .checkers-cell.selected {
+            background: #7fc97f !important;
+        }
+
+        .checkers-cell.possible-move {
+            background: #ffd700 !important;
+        }
+
+        .game-status {
+            font-size: 1.3em;
+            color: #333;
+            margin: 15px 0;
+            font-weight: bold;
+        }
+    </style>
 </head>
 <body>
-    <h1>IN WORK</h1>
+    <h1>🎮 Mini Jeux pour bebou </h1>
+
+    <div class="menu" id="menu">
+        <div class="game-card" onclick="showGame('clicker')">
+            <h2>👆 Clicker Débile</h2>
+            <p>Clique comme un malade pendant 10 secondes !</p>
+        </div>
+        <div class="game-card" onclick="showGame('reaction')">
+            <h2>⚡ Test de Réflexes</h2>
+            <p>Clique dès que ça devient vert !</p>
+        </div>
+        <div class="game-card" onclick="showGame('memory')">
+            <h2>🧠 Memory de Merde</h2>
+            <p>Trouve les paires d'emojis !</p>
+        </div>
+        <div class="game-card" onclick="showGame('spam')">
+            <h2>⌨️ Spam Master</h2>
+            <p>Tape n'importe quoi le plus vite possible !</p>
+        </div>
+        <div class="game-card" onclick="showGame('tictactoe')">
+            <h2>⭕ Morpion</h2>
+            <p>Affronte l'IA au morpion !</p>
+        </div>
+        <div class="game-card" onclick="showGame('chess')">
+            <h2>♟️ Échecs</h2>
+            <p>Joue aux échecs contre un bot !</p>
+        </div>
+        <div class="game-card" onclick="showGame('checkers')">
+            <h2>⚫ Dames</h2>
+            <p>Jeu de dames classique vs IA !</p>
+        </div>
+    </div>
+
+    <!-- Clicker Game -->
+    <div class="game-container" id="clicker">
+        <h2>👆 Clicker Débile</h2>
+        <div id="clicker-score">Score: 0</div>
+        <div id="clicker-time">Temps: 10s</div>
+        <div id="click-zone" onclick="incrementClick()">CLIQUE!</div>
+        <button onclick="startClicker()">Commencer</button>
+        <button class="back-btn" onclick="backToMenu()">Retour</button>
+    </div>
+
+    <!-- Reaction Game -->
+    <div class="game-container" id="reaction">
+        <h2>⚡ Test de Réflexes</h2>
+        <div id="reaction-result">Clique sur "Commencer" !</div>
+        <div id="reaction-box">Attends...</div>
+        <button onclick="startReaction()">Commencer</button>
+        <button class="back-btn" onclick="backToMenu()">Retour</button>
+    </div>
+
+    <!-- Memory Game -->
+    <div class="game-container" id="memory">
+        <h2>🧠 Memory de Merde</h2>
+        <div id="memory-status">Trouve les paires !</div>
+        <div class="memory-grid" id="memory-grid"></div>
+        <button onclick="startMemory()">Nouvelle Partie</button>
+        <button class="back-btn" onclick="backToMenu()">Retour</button>
+    </div>
+
+    <!-- Spam Game -->
+    <div class="game-container" id="spam">
+        <h2>⌨️ Spam Master</h2>
+        <div id="spam-counter">Caractères: 0</div>
+        <div id="spam-time">Temps: 15s</div>
+        <input type="text" id="spam-input" placeholder="Tape n'importe quoi !" disabled>
+        <button onclick="startSpam()">Commencer</button>
+        <button class="back-btn" onclick="backToMenu()">Retour</button>
+    </div>
+
+    <!-- Tic Tac Toe Game -->
+    <div class="game-container" id="tictactoe">
+        <h2>⭕ Morpion</h2>
+        <div class="game-status" id="ttt-status">À toi de jouer (X)</div>
+        <div class="tictactoe-board" id="ttt-board"></div>
+        <button onclick="startTicTacToe()">Nouvelle Partie</button>
+        <button class="back-btn" onclick="backToMenu()">Retour</button>
+    </div>
+
+    <!-- Chess Game -->
+    <div class="game-container" id="chess">
+        <h2>♟️ Échecs</h2>
+        <div class="game-status" id="chess-status">À toi de jouer (Blancs)</div>
+        <div class="chess-board" id="chess-board"></div>
+        <button onclick="startChess()">Nouvelle Partie</button>
+        <button class="back-btn" onclick="backToMenu()">Retour</button>
+    </div>
+
+    <!-- Checkers Game -->
+    <div class="game-container" id="checkers">
+        <h2>⚫ Dames</h2>
+        <div class="game-status" id="checkers-status">À toi de jouer (Noirs)</div>
+        <div class="checkers-board" id="checkers-board"></div>
+        <button onclick="startCheckers()">Nouvelle Partie</button>
+        <button class="back-btn" onclick="backToMenu()">Retour</button>
+    </div>
+
+    <script>
+        // Navigation
+        function showGame(gameId) {
+            document.getElementById('menu').style.display = 'none';
+            document.querySelectorAll('.game-container').forEach(g => g.classList.remove('active'));
+            document.getElementById(gameId).classList.add('active');
+        }
+
+        function backToMenu() {
+            document.getElementById('menu').style.display = 'grid';
+            document.querySelectorAll('.game-container').forEach(g => g.classList.remove('active'));
+            resetGames();
+        }
+
+        function resetGames() {
+            clickerRunning = false;
+            reactionRunning = false;
+            spamRunning = false;
+        }
+
+        // CLICKER GAME
+        let clickerScore = 0;
+        let clickerRunning = false;
+
+        function incrementClick() {
+            if (clickerRunning) {
+                clickerScore++;
+                document.getElementById('clicker-score').textContent = `Score: ${clickerScore}`;
+            }
+        }
+
+        function startClicker() {
+            clickerScore = 0;
+            clickerRunning = true;
+            let timeLeft = 10;
+            
+            document.getElementById('clicker-score').textContent = `Score: 0`;
+            document.getElementById('clicker-time').textContent = `Temps: ${timeLeft}s`;
+            
+            const timer = setInterval(() => {
+                timeLeft--;
+                document.getElementById('clicker-time').textContent = `Temps: ${timeLeft}s`;
+                
+                if (timeLeft <= 0) {
+                    clearInterval(timer);
+                    clickerRunning = false;
+                    alert(`Bravo ! Tu as cliqué ${clickerScore} fois ! ${clickerScore > 50 ? '🔥' : clickerScore > 30 ? '👍' : '😅'}`);
+                }
+            }, 1000);
+        }
+
+        // REACTION GAME
+        let reactionStartTime;
+        let reactionRunning = false;
+
+        function startReaction() {
+            const box = document.getElementById('reaction-box');
+            box.className = '';
+            box.textContent = 'Attends...';
+            document.getElementById('reaction-result').textContent = 'Prépare-toi...';
+            reactionRunning = false;
+            
+            const delay = Math.random() * 3000 + 2000;
+            
+            setTimeout(() => {
+                box.classList.add('green');
+                box.textContent = 'CLIQUE !';
+                reactionStartTime = Date.now();
+                reactionRunning = true;
+            }, delay);
+            
+            box.onclick = function() {
+                if (reactionRunning) {
+                    const reactionTime = Date.now() - reactionStartTime;
+                    document.getElementById('reaction-result').textContent = `${reactionTime}ms ! ${reactionTime < 200 ? '🚀 Éclair !' : reactionTime < 300 ? '⚡ Rapide !' : reactionTime < 500 ? '👍 Pas mal !' : '🐌 Mollasson !'}`;
+                    reactionRunning = false;
+                } else if (box.classList.contains('green') === false && box.textContent === 'Attends...') {
+                    document.getElementById('reaction-result').textContent = 'Trop tôt ! 😂';
+                    this.onclick = null;
+                }
+            };
+        }
+
+        // MEMORY GAME
+        const emojis = ['🐶', '🐱', '🐭', '🐹', '🐰', '🦊', '🐻', '🐼'];
+        let memoryCards = [];
+        let flippedCards = [];
+        let matchedPairs = 0;
+
+        function startMemory() {
+            matchedPairs = 0;
+            flippedCards = [];
+            document.getElementById('memory-status').textContent = 'Trouve les paires !';
+            
+            const shuffled = [...emojis, ...emojis].sort(() => Math.random() - 0.5);
+            memoryCards = shuffled.map((emoji, index) => ({
+                emoji,
+                id: index,
+                matched: false
+            }));
+            
+            renderMemoryGrid();
+        }
+
+        function renderMemoryGrid() {
+            const grid = document.getElementById('memory-grid');
+            grid.innerHTML = '';
+            
+            memoryCards.forEach((card, index) => {
+                const cardEl = document.createElement('div');
+                cardEl.className = 'memory-card';
+                cardEl.textContent = '?';
+                cardEl.onclick = () => flipCard(index);
+                grid.appendChild(cardEl);
+            });
+        }
+
+        function flipCard(index) {
+            if (flippedCards.length >= 2 || memoryCards[index].matched) return;
+            
+            const cardEls = document.querySelectorAll('.memory-card');
+            cardEls[index].textContent = memoryCards[index].emoji;
+            cardEls[index].classList.add('flipped');
+            
+            flippedCards.push(index);
+            
+            if (flippedCards.length === 2) {
+                setTimeout(checkMatch, 500);
+            }
+        }
+
+        function checkMatch() {
+            const [first, second] = flippedCards;
+            const cardEls = document.querySelectorAll('.memory-card');
+            
+            if (memoryCards[first].emoji === memoryCards[second].emoji) {
+                memoryCards[first].matched = true;
+                memoryCards[second].matched = true;
+                cardEls[first].classList.add('matched');
+                cardEls[second].classList.add('matched');
+                matchedPairs++;
+                
+                if (matchedPairs === emojis.length) {
+                    document.getElementById('memory-status').textContent = '🎉 Gagné ! T\'es un champion !';
+                }
+            } else {
+                cardEls[first].textContent = '?';
+                cardEls[second].textContent = '?';
+                cardEls[first].classList.remove('flipped');
+                cardEls[second].classList.remove('flipped');
+            }
+            
+            flippedCards = [];
+        }
+
+        // SPAM GAME
+        let spamRunning = false;
+
+        function startSpam() {
+            const input = document.getElementById('spam-input');
+            input.value = '';
+            input.disabled = false;
+            input.focus();
+            spamRunning = true;
+            
+            let timeLeft = 15;
+            document.getElementById('spam-time').textContent = `Temps: ${timeLeft}s`;
+            document.getElementById('spam-counter').textContent = `Caractères: 0`;
+            
+            input.oninput = function() {
+                if (spamRunning) {
+                    document.getElementById('spam-counter').textContent = `Caractères: ${this.value.length}`;
+                }
+            };
+            
+            const timer = setInterval(() => {
+                timeLeft--;
+                document.getElementById('spam-time').textContent = `Temps: ${timeLeft}s`;
+                
+                if (timeLeft <= 0) {
+                    clearInterval(timer);
+                    spamRunning = false;
+                    input.disabled = true;
+                    const count = input.value.length;
+                    alert(`Tu as tapé ${count} caractères ! ${count > 100 ? '⌨️ Machine à écrire !' : count > 50 ? '👍 Pas mal !' : '🐌 Faut s\'entraîner !'}`);
+                }
+            }, 1000);
+        }
+
+        // TIC TAC TOE GAME
+        let tttBoard = Array(9).fill(null);
+        let currentPlayer = 'X';
+        let gameOver = false;
+
+        function startTicTacToe() {
+            tttBoard = Array(9).fill(null);
+            currentPlayer = 'X';
+            gameOver = false;
+            document.getElementById('ttt-status').textContent = 'À toi de jouer (X)';
+            renderTicTacToe();
+        }
+
+        function renderTicTacToe() {
+            const board = document.getElementById('ttt-board');
+            board.innerHTML = '';
+            
+            tttBoard.forEach((cell, index) => {
+                const cellEl = document.createElement('div');
+                cellEl.className = 'tictactoe-cell';
+                if (cell) {
+                    cellEl.classList.add('taken');
+                    cellEl.textContent = cell;
+                }
+                cellEl.onclick = () => playTicTacToe(index);
+                board.appendChild(cellEl);
+            });
+        }
+
+        function playTicTacToe(index) {
+            if (tttBoard[index] || gameOver || currentPlayer === 'O') return;
+            
+            tttBoard[index] = 'X';
+            renderTicTacToe();
+            
+            if (checkTTTWinner('X')) {
+                document.getElementById('ttt-status').textContent = '🎉 Tu as gagné !';
+                gameOver = true;
+                return;
+            }
+            
+            if (tttBoard.every(cell => cell)) {
+                document.getElementById('ttt-status').textContent = '🤝 Match nul !';
+                gameOver = true;
+                return;
+            }
+            
+            currentPlayer = 'O';
+            document.getElementById('ttt-status').textContent = 'L\'IA réfléchit...';
+            
+            setTimeout(() => {
+                aiMoveTicTacToe();
+            }, 500);
+        }
+
+        function aiMoveTicTacToe() {
+            // IA simple mais efficace
+            let move = findBestMove();
+            
+            if (move === -1) {
+                const emptyCells = tttBoard.map((cell, i) => cell === null ? i : null).filter(i => i !== null);
+                move = emptyCells[Math.floor(Math.random() * emptyCells.length)];
+            }
+            
+            tttBoard[move] = 'O';
+            renderTicTacToe();
+            
+            if (checkTTTWinner('O')) {
+                document.getElementById('ttt-status').textContent = '😅 L\'IA a gagné !';
+                gameOver = true;
+                return;
+            }
+            
+            if (tttBoard.every(cell => cell)) {
+                document.getElementById('ttt-status').textContent = '🤝 Match nul !';
+                gameOver = true;
+                return;
+            }
+            
+            currentPlayer = 'X';
+            document.getElementById('ttt-status').textContent = 'À toi de jouer (X)';
+        }
+
+        function findBestMove() {
+            // Essaie de gagner
+            for (let i = 0; i < 9; i++) {
+                if (!tttBoard[i]) {
+                    tttBoard[i] = 'O';
+                    if (checkTTTWinner('O')) {
+                        tttBoard[i] = null;
+                        return i;
+                    }
+                    tttBoard[i] = null;
+                }
+            }
+            
+            // Bloque le joueur
+            for (let i = 0; i < 9; i++) {
+                if (!tttBoard[i]) {
+                    tttBoard[i] = 'X';
+                    if (checkTTTWinner('X')) {
+                        tttBoard[i] = null;
+                        return i;
+                    }
+                    tttBoard[i] = null;
+                }
+            }
+            
+            // Prend le centre
+            if (!tttBoard[4]) return 4;
+            
+            // Prend un coin
+            const corners = [0, 2, 6, 8];
+            for (let corner of corners) {
+                if (!tttBoard[corner]) return corner;
+            }
+            
+            return -1;
+        }
+
+        function checkTTTWinner(player) {
+            const lines = [
+                [0, 1, 2], [3, 4, 5], [6, 7, 8],
+                [0, 3, 6], [1, 4, 7], [2, 5, 8],
+                [0, 4, 8], [2, 4, 6]
+            ];
+            
+            return lines.some(line => 
+                line.every(index => tttBoard[index] === player)
+            );
+        }
+
+        // Initialize games on page load
+        startTicTacToe();
+
+        // CHESS GAME
+        const chessPieces = {
+            'K': '♔', 'Q': '♕', 'R': '♖', 'B': '♗', 'N': '♘', 'P': '♙',
+            'k': '♚', 'q': '♛', 'r': '♜', 'b': '♝', 'n': '♞', 'p': '♟'
+        };
+
+        let chessBoard = [];
+        let selectedChessSquare = null;
+        let whiteToMove = true;
+        let chessGameOver = false;
+
+        function startChess() {
+            chessBoard = [
+                ['r', 'n', 'b', 'q', 'k', 'b', 'n', 'r'],
+                ['p', 'p', 'p', 'p', 'p', 'p', 'p', 'p'],
+                [null, null, null, null, null, null, null, null],
+                [null, null, null, null, null, null, null, null],
+                [null, null, null, null, null, null, null, null],
+                [null, null, null, null, null, null, null, null],
+                ['P', 'P', 'P', 'P', 'P', 'P', 'P', 'P'],
+                ['R', 'N', 'B', 'Q', 'K', 'B', 'N', 'R']
+            ];
+            selectedChessSquare = null;
+            whiteToMove = true;
+            chessGameOver = false;
+            document.getElementById('chess-status').textContent = 'À toi de jouer (Blancs)';
+            renderChess();
+        }
+
+        function renderChess() {
+            const board = document.getElementById('chess-board');
+            board.innerHTML = '';
+            
+            for (let row = 0; row < 8; row++) {
+                for (let col = 0; col < 8; col++) {
+                    const cell = document.createElement('div');
+                    cell.className = 'chess-cell ' + ((row + col) % 2 === 0 ? 'white' : 'black');
+                    
+                    if (selectedChessSquare && selectedChessSquare.row === row && selectedChessSquare.col === col) {
+                        cell.classList.add('selected');
+                    }
+                    
+                    const piece = chessBoard[row][col];
+                    if (piece) {
+                        cell.textContent = chessPieces[piece];
+                    }
+                    
+                    cell.onclick = () => clickChessSquare(row, col);
+                    board.appendChild(cell);
+                }
+            }
+        }
+
+        function clickChessSquare(row, col) {
+            if (chessGameOver || !whiteToMove) return;
+            
+            const piece = chessBoard[row][col];
+            
+            if (selectedChessSquare) {
+                // Essaie de déplacer
+                if (isValidChessMove(selectedChessSquare.row, selectedChessSquare.col, row, col)) {
+                    chessBoard[row][col] = chessBoard[selectedChessSquare.row][selectedChessSquare.col];
+                    chessBoard[selectedChessSquare.row][selectedChessSquare.col] = null;
+                    selectedChessSquare = null;
+                    
+                    if (checkChessGameOver()) {
+                        return;
+                    }
+                    
+                    whiteToMove = false;
+                    document.getElementById('chess-status').textContent = 'L\'IA réfléchit...';
+                    renderChess();
+                    
+                    setTimeout(() => {
+                        aiMoveChess();
+                    }, 500);
+                } else {
+                    selectedChessSquare = null;
+                }
+            } else if (piece && piece === piece.toUpperCase()) {
+                // Sélectionne une pièce blanche
+                selectedChessSquare = { row, col };
+            }
+            
+            renderChess();
+        }
+
+        function isValidChessMove(fromRow, fromCol, toRow, toCol) {
+            const piece = chessBoard[fromRow][fromCol];
+            const target = chessBoard[toRow][toCol];
+            
+            // Ne peut pas capturer ses propres pièces
+            if (target && target === target.toUpperCase()) return false;
+            
+            const rowDiff = toRow - fromRow;
+            const colDiff = Math.abs(toCol - fromCol);
+            
+            // Règles simplifiées
+            switch (piece.toUpperCase()) {
+                case 'P': // Pion
+                    if (piece === 'P') {
+                        if (colDiff === 0 && !target) {
+                            return rowDiff === -1 || (fromRow === 6 && rowDiff === -2);
+                        }
+                        return colDiff === 1 && rowDiff === -1 && target;
+                    }
+                    break;
+                case 'R': // Tour
+                    return (rowDiff === 0 || colDiff === 0) && isPathClear(fromRow, fromCol, toRow, toCol);
+                case 'N': // Cavalier
+                    return (Math.abs(rowDiff) === 2 && colDiff === 1) || (Math.abs(rowDiff) === 1 && colDiff === 2);
+                case 'B': // Fou
+                    return Math.abs(rowDiff) === colDiff && isPathClear(fromRow, fromCol, toRow, toCol);
+                case 'Q': // Reine
+                    return (rowDiff === 0 || colDiff === 0 || Math.abs(rowDiff) === colDiff) && isPathClear(fromRow, fromCol, toRow, toCol);
+                case 'K': // Roi
+                    return Math.abs(rowDiff) <= 1 && colDiff <= 1;
+            }
+            
+            return false;
+        }
+
+        function isPathClear(fromRow, fromCol, toRow, toCol) {
+            const rowStep = Math.sign(toRow - fromRow);
+            const colStep = Math.sign(toCol - fromCol);
+            let row = fromRow + rowStep;
+            let col = fromCol + colStep;
+            
+            while (row !== toRow || col !== toCol) {
+                if (chessBoard[row][col]) return false;
+                row += rowStep;
+                col += colStep;
+            }
+            
+            return true;
+        }
+
+        function aiMoveChess() {
+            // IA très simple : trouve un coup valide aléatoire
+            const moves = [];
+            
+            for (let fromRow = 0; fromRow < 8; fromRow++) {
+                for (let fromCol = 0; fromCol < 8; fromCol++) {
+                    const piece = chessBoard[fromRow][fromCol];
+                    if (piece && piece === piece.toLowerCase()) {
+                        for (let toRow = 0; toRow < 8; toRow++) {
+                            for (let toCol = 0; toCol < 8; toCol++) {
+                                if (isValidChessMoveAI(fromRow, fromCol, toRow, toCol)) {
+                                    moves.push({ fromRow, fromCol, toRow, toCol });
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            
+            if (moves.length > 0) {
+                const move = moves[Math.floor(Math.random() * moves.length)];
+                chessBoard[move.toRow][move.toCol] = chessBoard[move.fromRow][move.fromCol];
+                chessBoard[move.fromRow][move.fromCol] = null;
+            }
+            
+            if (checkChessGameOver()) {
+                return;
+            }
+            
+            whiteToMove = true;
+            document.getElementById('chess-status').textContent = 'À toi de jouer (Blancs)';
+            renderChess();
+        }
+
+        function isValidChessMoveAI(fromRow, fromCol, toRow, toCol) {
+            const piece = chessBoard[fromRow][fromCol];
+            const target = chessBoard[toRow][toCol];
+            
+            if (target && target === target.toLowerCase()) return false;
+            
+            const rowDiff = toRow - fromRow;
+            const colDiff = Math.abs(toCol - fromCol);
+            
+            switch (piece) {
+                case 'p':
+                    if (colDiff === 0 && !target) {
+                        return rowDiff === 1 || (fromRow === 1 && rowDiff === 2);
+                    }
+                    return colDiff === 1 && rowDiff === 1 && target;
+                case 'r':
+                    return (rowDiff === 0 || colDiff === 0) && isPathClear(fromRow, fromCol, toRow, toCol);
+                case 'n':
+                    return (Math.abs(rowDiff) === 2 && colDiff === 1) || (Math.abs(rowDiff) === 1 && colDiff === 2);
+                case 'b':
+                    return Math.abs(rowDiff) === colDiff && isPathClear(fromRow, fromCol, toRow, toCol);
+                case 'q':
+                    return (rowDiff === 0 || colDiff === 0 || Math.abs(rowDiff) === colDiff) && isPathClear(fromRow, fromCol, toRow, toCol);
+                case 'k':
+                    return Math.abs(rowDiff) <= 1 && colDiff <= 1;
+            }
+            
+            return false;
+        }
+
+        function checkChessGameOver() {
+            let whiteKing = false, blackKing = false;
+            
+            for (let row = 0; row < 8; row++) {
+                for (let col = 0; col < 8; col++) {
+                    if (chessBoard[row][col] === 'K') whiteKing = true;
+                    if (chessBoard[row][col] === 'k') blackKing = true;
+                }
+            }
+            
+            if (!whiteKing) {
+                document.getElementById('chess-status').textContent = '😅 L\'IA a gagné !';
+                chessGameOver = true;
+                return true;
+            }
+            
+            if (!blackKing) {
+                document.getElementById('chess-status').textContent = '🎉 Tu as gagné !';
+                chessGameOver = true;
+                return true;
+            }
+            
+            return false;
+        }
+
+        startChess();
+
+        // CHECKERS GAME
+        let checkersBoard = [];
+        let selectedChecker = null;
+        let playerTurn = true; // true = noir (joueur), false = blanc (IA)
+        let checkersGameOver = false;
+        let mustCapture = false;
+
+        function startCheckers() {
+            // Initialise le plateau de dames
+            checkersBoard = Array(8).fill(null).map(() => Array(8).fill(null));
+            
+            // Place les pions noirs (joueur) en haut
+            for (let row = 0; row < 3; row++) {
+                for (let col = 0; col < 8; col++) {
+                    if ((row + col) % 2 === 1) {
+                        checkersBoard[row][col] = 'b'; // black
+                    }
+                }
+            }
+            
+            // Place les pions blancs (IA) en bas
+            for (let row = 5; row < 8; row++) {
+                for (let col = 0; col < 8; col++) {
+                    if ((row + col) % 2 === 1) {
+                        checkersBoard[row][col] = 'w'; // white
+                    }
+                }
+            }
+            
+            selectedChecker = null;
+            playerTurn = true;
+            checkersGameOver = false;
+            mustCapture = false;
+            document.getElementById('checkers-status').textContent = 'À toi de jouer (Noirs)';
+            renderCheckers();
+        }
+
+        function renderCheckers() {
+            const board = document.getElementById('checkers-board');
+            board.innerHTML = '';
+            
+            for (let row = 0; row < 8; row++) {
+                for (let col = 0; col < 8; col++) {
+                    const cell = document.createElement('div');
+                    cell.className = 'checkers-cell ' + ((row + col) % 2 === 0 ? 'white' : 'black');
+                    
+                    if (selectedChecker && selectedChecker.row === row && selectedChecker.col === col) {
+                        cell.classList.add('selected');
+                    }
+                    
+                    const piece = checkersBoard[row][col];
+                    if (piece) {
+                        cell.textContent = piece === 'b' ? '⚫' : piece === 'B' ? '⬛' : piece === 'w' ? '⚪' : '⬜';
+                    }
+                    
+                    cell.onclick = () => clickCheckersSquare(row, col);
+                    board.appendChild(cell);
+                }
+            }
+        }
+
+        function clickCheckersSquare(row, col) {
+            if (checkersGameOver || !playerTurn) return;
+            
+            const piece = checkersBoard[row][col];
+            
+            if (selectedChecker) {
+                const validMoves = getValidCheckersMoves(selectedChecker.row, selectedChecker.col);
+                const moveIndex = validMoves.findIndex(m => m.toRow === row && m.toCol === col);
+                
+                if (moveIndex !== -1) {
+                    const move = validMoves[moveIndex];
+                    
+                    // Déplace la pièce
+                    checkersBoard[row][col] = checkersBoard[selectedChecker.row][selectedChecker.col];
+                    checkersBoard[selectedChecker.row][selectedChecker.col] = null;
+                    
+                    // Promotion en dame
+                    if (row === 7 && checkersBoard[row][col] === 'b') {
+                        checkersBoard[row][col] = 'B';
+                    }
+                    
+                    // Capture
+                    if (move.captured) {
+                        checkersBoard[move.captured.row][move.captured.col] = null;
+                    }
+                    
+                    selectedChecker = null;
+                    
+                    if (checkCheckersGameOver()) {
+                        return;
+                    }
+                    
+                    playerTurn = false;
+                    document.getElementById('checkers-status').textContent = 'L\'IA réfléchit...';
+                    renderCheckers();
+                    
+                    setTimeout(() => {
+                        aiMoveCheckers();
+                    }, 500);
+                } else {
+                    selectedChecker = null;
+                }
+            } else if (piece && (piece === 'b' || piece === 'B')) {
+                selectedChecker = { row, col };
+            }
+            
+            renderCheckers();
+        }
+
+        function getValidCheckersMoves(row, col) {
+            const piece = checkersBoard[row][col];
+            const moves = [];
+            const isKing = piece === 'B' || piece === 'W';
+            const isBlack = piece === 'b' || piece === 'B';
+            
+            const directions = isKing ? 
+                [[-1, -1], [-1, 1], [1, -1], [1, 1]] : 
+                isBlack ? [[1, -1], [1, 1]] : [[-1, -1], [-1, 1]];
+            
+            // Mouvements simples
+            for (let [dRow, dCol] of directions) {
+                const newRow = row + dRow;
+                const newCol = col + dCol;
+                
+                if (newRow >= 0 && newRow < 8 && newCol >= 0 && newCol < 8 && !checkersBoard[newRow][newCol]) {
+                    moves.push({ toRow: newRow, toCol: newCol, captured: null });
+                }
+            }
+            
+            // Captures
+            for (let [dRow, dCol] of directions) {
+                const jumpRow = row + dRow * 2;
+                const jumpCol = col + dCol * 2;
+                const midRow = row + dRow;
+                const midCol = col + dCol;
+                
+                if (jumpRow >= 0 && jumpRow < 8 && jumpCol >= 0 && jumpCol < 8) {
+                    const middle = checkersBoard[midRow][midCol];
+                    if (middle && !checkersBoard[jumpRow][jumpCol]) {
+                        const isOpponent = isBlack ? 
+                            (middle === 'w' || middle === 'W') : 
+                            (middle === 'b' || middle === 'B');
+                        
+                        if (isOpponent) {
+                            moves.push({ 
+                                toRow: jumpRow, 
+                                toCol: jumpCol, 
+                                captured: { row: midRow, col: midCol }
+                            });
+                        }
+                    }
+                }
+            }
+            
+            return moves;
+        }
+
+        function aiMoveCheckers() {
+            // Trouve tous les coups possibles pour l'IA
+            const allMoves = [];
+            
+            for (let row = 0; row < 8; row++) {
+                for (let col = 0; col < 8; col++) {
+                    const piece = checkersBoard[row][col];
+                    if (piece === 'w' || piece === 'W') {
+                        const moves = getValidCheckersMoves(row, col);
+                        moves.forEach(move => {
+                            allMoves.push({ fromRow: row, fromCol: col, ...move });
+                        });
+                    }
+                }
+            }
+            
+            if (allMoves.length > 0) {
+                // Priorité aux captures
+                const captures = allMoves.filter(m => m.captured);
+                const move = captures.length > 0 ? 
+                    captures[Math.floor(Math.random() * captures.length)] :
+                    allMoves[Math.floor(Math.random() * allMoves.length)];
+                
+                checkersBoard[move.toRow][move.toCol] = checkersBoard[move.fromRow][move.fromCol];
+                checkersBoard[move.fromRow][move.fromCol] = null;
+                
+                // Promotion
+                if (move.toRow === 0 && checkersBoard[move.toRow][move.toCol] === 'w') {
+                    checkersBoard[move.toRow][move.toCol] = 'W';
+                }
+                
+                if (move.captured) {
+                    checkersBoard[move.captured.row][move.captured.col] = null;
+                }
+            }
+            
+            if (checkCheckersGameOver()) {
+                return;
+            }
+            
+            playerTurn = true;
+            document.getElementById('checkers-status').textContent = 'À toi de jouer (Noirs)';
+            renderCheckers();
+        }
+
+        function checkCheckersGameOver() {
+            let blackPieces = 0, whitePieces = 0;
+            
+            for (let row = 0; row < 8; row++) {
+                for (let col = 0; col < 8; col++) {
+                    const piece = checkersBoard[row][col];
+                    if (piece === 'b' || piece === 'B') blackPieces++;
+                    if (piece === 'w' || piece === 'W') whitePieces++;
+                }
+            }
+            
+            if (blackPieces === 0) {
+                document.getElementById('checkers-status').textContent = '😅 L\'IA a gagné !';
+                checkersGameOver = true;
+                return true;
+            }
+            
+            if (whitePieces === 0) {
+                document.getElementById('checkers-status').textContent = '🎉 Tu as gagné !';
+                checkersGameOver = true;
+                return true;
+            }
+            
+            return false;
+        }
+
+        startCheckers();
+    </script>
 </body>
 </html>
