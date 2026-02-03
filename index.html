@@ -1477,7 +1477,21 @@
 
         // HANGMAN
         let hangmanRunning = false;
-        const hangmanWords = ['javascript','pomme','ordinateur','voiture','elephant','azerty','bonjour'];
+        const hangmanWords = [
+    'voiture', 'maison', 'arbre', 'livre', 'chaise', 'table', 'écran', 'souris', 'clavier', 'lampe',
+    'fenêtre', 'porte', 'mur', 'sol', 'plafond', 'tapis', 'canapé', 'lit', 'oreiller', 'couverture',
+    'miroir', 'cadre', 'photo', 'bouteille', 'verre', 'assiette', 'fourchette', 'couteau', 'cuillère', 'casserole',
+    'poêle', 'frigo', 'micro-ondes', 'grille', 'bouilloire', 'évier', 'robinet', 'serviette', 'savon', 'shampoing',
+    'brosse', 'peigne', 'parfum', 'chaussette', 'pantalon', 'chemise', 'robe', 'jupe', 'pull', 'manteau',
+    'chaussure', 'ceinture', 'chapeau', 'gant', 'écharpe', 'lunettes', 'montre', 'sac', 'clé', 'valise',
+    'vélo', 'moto', 'bus', 'train', 'avion', 'bateau', 'plage', 'montagne', 'fleur', 'plante',
+    'jardin', 'chemin', 'route', 'rue', 'feu', 'étoile', 'lune', 'soleil', 'nuage', 'pluie',
+    'neige', 'vent', 'mer', 'rivière', 'lac', 'pont', 'désert', 'volcan', 'pomme', 'banane',
+    'orange', 'raisin', 'fraise', 'pêche', 'poire', 'kiwi', 'citron', 'tomate', 'carotte', 'pomme de terre',
+    'oignon', 'ail', 'salade', 'pain', 'fromage', 'lait', 'œuf', 'poulet', 'bœuf', 'poisson',
+    'riz', 'pâtes', 'sucre', 'sel', 'huile', 'vinaigre', 'café', 'thé', 'eau', 'vin'
+];
+
         let hangmanWord = '';
         let hangmanGuessed = [];
         let hangmanTries = 0;
