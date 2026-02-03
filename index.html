@@ -338,6 +338,22 @@
             <h2>⚫ Dames</h2>
             <p>Jeu de dames classique vs IA !</p>
         </div>
+        <div class="game-card" onclick="showGame('rps')">
+            <h2>✂️ Pierre-Feuille-Ciseaux</h2>
+            <p>Affronte l'ordi au classique RPS.</p>
+        </div>
+        <div class="game-card" onclick="showGame('guess')">
+            <h2>❓ Devine le nombre</h2>
+            <p>Trouve le nombre mystère entre 1 et 100.</p>
+        </div>
+        <div class="game-card" onclick="showGame('simon')">
+            <h2>🔴 Simon Says</h2>
+            <p>Répète la séquence de couleurs.</p>
+        </div>
+        <div class="game-card" onclick="showGame('mole')">
+            <h2>🦫 Whack-a-Mole</h2>
+            <p>Frappe les taupes qui apparaissent !</p>
+        </div>
     </div>
 
     <!-- Clicker Game -->
@@ -405,6 +421,51 @@
         <button class="back-btn" onclick="backToMenu()">Retour</button>
     </div>
 
+    <!-- Nouveaux mini-jeux: RPS, Guess, Simon, Mole -->
+    <!-- Rock Paper Scissors -->
+    <div class="game-container" id="rps">
+        <h2>✂️ Pierre-Feuille-Ciseaux</h2>
+        <div class="game-status" id="rps-result">Choisis une option</div>
+        <div style="margin:15px;"> 
+            <button onclick="playRPS('rock')">🪨 Pierre</button>
+            <button onclick="playRPS('paper')">📄 Feuille</button>
+            <button onclick="playRPS('scissors')">✂️ Ciseaux</button>
+        </div>
+        <button class="back-btn" onclick="backToMenu()">Retour</button>
+    </div>
+
+    <!-- Guess the Number -->
+    <div class="game-container" id="guess">
+        <h2>❓ Devine le nombre</h2>
+        <div class="game-status" id="guess-status">Je pense à un nombre entre 1 et 100.</div>
+        <input id="guess-input" type="number" placeholder="Ton choix" style="padding:10px;margin:10px;border-radius:6px;font-size:1em;">
+        <div style="margin:10px;"><button onclick="submitGuess()">Proposer</button><button onclick="startGuess()">Nouvelle Partie</button></div>
+        <button class="back-btn" onclick="backToMenu()">Retour</button>
+    </div>
+
+    <!-- Simon Says -->
+    <div class="game-container" id="simon">
+        <h2>🔴 Simon Says</h2>
+        <div class="game-status" id="simon-status">Appuie sur "Commencer"</div>
+        <div style="display:flex;gap:10px;justify-content:center;margin:15px;">
+            <div id="simon-0" style="width:80px;height:80px;border-radius:10px;background:#e74c3c;cursor:pointer"></div>
+            <div id="simon-1" style="width:80px;height:80px;border-radius:10px;background:#f1c40f;cursor:pointer"></div>
+            <div id="simon-2" style="width:80px;height:80px;border-radius:10px;background:#2ecc71;cursor:pointer"></div>
+            <div id="simon-3" style="width:80px;height:80px;border-radius:10px;background:#3498db;cursor:pointer"></div>
+        </div>
+        <button onclick="startSimon()">Commencer</button>
+        <button class="back-btn" onclick="backToMenu()">Retour</button>
+    </div>
+
+    <!-- Whack-a-Mole -->
+    <div class="game-container" id="mole">
+        <h2>🦫 Whack-a-Mole</h2>
+        <div class="game-status" id="mole-status">Score: 0</div>
+        <div id="mole-grid" style="display:grid;grid-template-columns:repeat(3,120px);gap:10px;justify-content:center;margin:15px;"></div>
+        <button onclick="startMole()">Commencer</button>
+        <button class="back-btn" onclick="backToMenu()">Retour</button>
+    </div>
+
     <script>
         // Navigation
         function showGame(gameId) {
@@ -423,6 +484,11 @@
             clickerRunning = false;
             reactionRunning = false;
             spamRunning = false;
+            // Nouveaux jeux
+            rpsPlaying = false;
+            guessRunning = false;
+            simonRunning = false;
+            moleRunning = false;
         }
 
         // CLICKER GAME
@@ -1184,6 +1250,115 @@
             }
             
             return false;
+        }
+
+        // --- NOUVEAUX JEUX: implémentation JS ---
+
+        // RPS
+        let rpsPlaying = false;
+        function playRPS(choice) {
+            const opts = ['rock','paper','scissors'];
+            const comp = opts[Math.floor(Math.random()*3)];
+            let result = '';
+            if (choice === comp) result = 'Égalité !';
+            else if ((choice==='rock'&&comp==='scissors')||(choice==='paper'&&comp==='rock')||(choice==='scissors'&&comp==='paper')) result = 'Tu gagnes !';
+            else result = 'L\'ordi gagne !';
+            document.getElementById('rps-result').textContent = `Tu: ${choice} — Ordi: ${comp} → ${result}`;
+        }
+
+        // Guess the number
+        let guessRunning = false;
+        let secretNumber = 0;
+        function startGuess() {
+            secretNumber = Math.floor(Math.random()*100)+1;
+            guessRunning = true;
+            document.getElementById('guess-status').textContent = 'Nouvelle partie ! J\'ai choisi un nombre entre 1 et 100.';
+            document.getElementById('guess-input').value = '';
+        }
+        function submitGuess(){
+            if(!guessRunning) startGuess();
+            const val = parseInt(document.getElementById('guess-input').value,10);
+            if(!val){ document.getElementById('guess-status').textContent = 'Entre un nombre valide !'; return; }
+            if(val === secretNumber){ document.getElementById('guess-status').textContent = `🎉 Correct ! C'était ${secretNumber}.`; guessRunning=false; }
+            else if(val < secretNumber) document.getElementById('guess-status').textContent = 'Trop petit !';
+            else document.getElementById('guess-status').textContent = 'Trop grand !';
+        }
+
+        // Simon Says
+        let simonSequence = [];
+        let simonPlayer = [];
+        let simonRunning = false;
+        function startSimon(){
+            simonSequence = [];
+            simonPlayer = [];
+            simonRound();
+        }
+        function simonRound(){
+            const next = Math.floor(Math.random()*4);
+            simonSequence.push(next);
+            document.getElementById('simon-status').textContent = `Round ${simonSequence.length}`;
+            playSimonSequence(0);
+        }
+        function playSimonSequence(i){
+            if(i>=simonSequence.length) { simonPlayer = []; simonRunning = true; document.getElementById('simon-status').textContent='À toi !'; return; }
+            const idx = simonSequence[i];
+            const el = document.getElementById('simon-'+idx);
+            const old = el.style.opacity;
+            el.style.filter = 'brightness(1.6)';
+            setTimeout(()=>{ el.style.filter=''; playSimonSequence(i+1); }, 600);
+        }
+        document.getElementById('simon-0').onclick = ()=>simonClick(0);
+        document.getElementById('simon-1').onclick = ()=>simonClick(1);
+        document.getElementById('simon-2').onclick = ()=>simonClick(2);
+        document.getElementById('simon-3').onclick = ()=>simonClick(3);
+        function simonClick(i){
+            if(!simonRunning) return;
+            simonPlayer.push(i);
+            // jouer un flash
+            const el = document.getElementById('simon-'+i);
+            el.style.transform='scale(1.05)';
+            setTimeout(()=>el.style.transform='',150);
+            const pos = simonPlayer.length-1;
+            if(simonPlayer[pos] !== simonSequence[pos]){
+                simonRunning = false;
+                document.getElementById('simon-status').textContent = '❌ Raté ! Recommence.';
+                return;
+            }
+            if(simonPlayer.length === simonSequence.length){
+                simonRunning = false;
+                document.getElementById('simon-status').textContent = '✅ Bien joué ! Prépare la prochaine...';
+                setTimeout(simonRound,700);
+            }
+        }
+
+        // Whack-a-Mole
+        let moleInterval = null;
+        let moleScore = 0;
+        let moleRunning = false;
+        function startMole(){
+            const grid = document.getElementById('mole-grid');
+            grid.innerHTML = '';
+            moleScore = 0;
+            document.getElementById('mole-status').textContent = 'Score: 0';
+            for(let i=0;i<9;i++){
+                const cell = document.createElement('div');
+                cell.style.width='120px'; cell.style.height='80px'; cell.style.background='#95a5a6'; cell.style.borderRadius='8px'; cell.style.display='flex'; cell.style.alignItems='center'; cell.style.justifyContent='center'; cell.style.cursor='pointer';
+                cell.dataset.index = i;
+                cell.onclick = ()=>{ if(cell.dataset.has==='1'){ moleScore++; cell.dataset.has='0'; cell.textContent=''; document.getElementById('mole-status').textContent = 'Score: '+moleScore; } };
+                grid.appendChild(cell);
+            }
+            moleRunning = true;
+            moleInterval = setInterval(()=>{
+                const cells = Array.from(document.getElementById('mole-grid').children);
+                cells.forEach(c=>{ c.dataset.has='0'; c.textContent=''; });
+                const idx = Math.floor(Math.random()*cells.length);
+                const target = cells[idx];
+                target.dataset.has='1';
+                target.textContent='🦫';
+                setTimeout(()=>{ if(target.dataset.has==='1'){ target.dataset.has='0'; target.textContent=''; } },700);
+            },700);
+            // arrêter après 20s
+            setTimeout(()=>{ clearInterval(moleInterval); moleRunning=false; alert('Fin du jeu ! Score: '+moleScore); },20000);
         }
 
         startCheckers();
