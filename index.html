@@ -386,7 +386,52 @@
             <h2>🐦 Flappy Bird</h2>
             <p>Traverse les tuyaux sans les toucher.</p>
         </div>
+        <div class="game-card" onclick="showGame('puzzle15')">
+            <h2>🔢 Puzzle 15</h2>
+            <p>Remets les tuiles dans l'ordre (glisse).</p>
+        </div>
+        <div class="game-card" onclick="showGame('lightsout')">
+            <h2>💡 Lights Out</h2>
+            <p>Éteins toutes les lumières.</p>
+        </div>
+        <div class="game-card" onclick="showGame('bubble')">
+            <h2>🟦 Bubble Pop</h2>
+            <p>Fais éclater un maximum de bulles.</p>
+        </div>
+        <div class="game-card" onclick="showGame('game2048')">
+            <h2>🔢 2048</h2>
+            <p>Combine les tuiles pour atteindre 2048.</p>
+        </div>
+        <div class="game-card" onclick="showGame('mines')">
+            <h2>💣 Minesweeper</h2>
+            <p>Détecte toutes les mines sans exploser.</p>
+        </div>
+        <div class="game-card" onclick="showGame('pong')">
+            <h2>🏓 Pong</h2>
+            <p>Attrape la balle avec ta raquette.</p>
+        </div>
+        <div class="game-card" onclick="showGame('colormatch')">
+            <h2>🎨 Color Match</h2>
+            <p>Choisis la bonne couleur le plus vite.</p>
+        </div>
     </div>
+
+        <div class="game-card" onclick="showGame('target')">
+            <h2>🎯 Target Practice</h2>
+            <p>Frappe les cibles qui apparaissent.</p>
+        </div>
+        <div class="game-card" onclick="showGame('numzap')">
+            <h2>🔢 Number Zap</h2>
+            <p>Clique les nombres dans l'ordre.</p>
+        </div>
+        <div class="game-card" onclick="showGame('simonrev')">
+            <h2>🔁 Simon Reverse</h2>
+            <p>Répète la séquence à l'envers.</p>
+        </div>
+        <div class="game-card" onclick="showGame('reflexsprint')">
+            <h2>⚡ Reflex Sprint</h2>
+            <p>Série de tests de réflexes rapides.</p>
+        </div>
 
     <!-- Clicker Game -->
     <div class="game-container" id="clicker">
@@ -572,6 +617,111 @@
         <button class="back-btn" onclick="backToMenu()">Retour</button>
     </div>
 
+    <!-- Puzzle 15 -->
+    <div class="game-container" id="puzzle15">
+        <h2>🔢 Puzzle 15</h2>
+        <div id="puzzle15-status">Remets les tuiles dans l'ordre.</div>
+        <div id="puzzle15-grid" style="display:grid;grid-template-columns:repeat(4,80px);gap:8px;justify-content:center;margin:15px;"></div>
+        <div style="margin:10px;"><button onclick="startPuzzle15()">Nouvelle Partie</button></div>
+        <button class="back-btn" onclick="backToMenu()">Retour</button>
+    </div>
+
+    <!-- Lights Out -->
+    <div class="game-container" id="lightsout">
+        <h2>💡 Lights Out</h2>
+        <div id="lightsout-status">Éteins toutes les lumières.</div>
+        <div id="lightsout-grid" style="display:grid;grid-template-columns:repeat(5,60px);gap:6px;justify-content:center;margin:15px;"></div>
+        <div style="margin:10px;"><button onclick="startLightsOut()">Nouvelle Partie</button></div>
+        <button class="back-btn" onclick="backToMenu()">Retour</button>
+    </div>
+
+    <!-- Bubble Pop -->
+    <div class="game-container" id="bubble">
+        <h2>🟦 Bubble Pop</h2>
+        <div id="bubble-status">Score: 0</div>
+        <div id="bubble-grid" style="display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:15px;max-width:520px;"></div>
+        <div style="margin:10px;"><button onclick="startBubblePop()">Commencer</button></div>
+        <button class="back-btn" onclick="backToMenu()">Retour</button>
+    </div>
+
+    <!-- 2048 -->
+    <div class="game-container" id="game2048">
+        <h2>🔢 2048</h2>
+        <div id="g2048-status">Score: 0</div>
+        <div id="g2048-grid" style="display:grid;grid-template-columns:repeat(4,80px);gap:8px;justify-content:center;margin:15px;"></div>
+        <div style="margin:10px;"><button onclick="start2048()">Nouvelle Partie</button></div>
+        <button class="back-btn" onclick="backToMenu()">Retour</button>
+    </div>
+
+    <!-- Minesweeper -->
+    <div class="game-container" id="mines">
+        <h2>💣 Minesweeper</h2>
+        <div id="mines-status">Bonne chance.</div>
+        <div id="mines-grid" style="display:grid;grid-template-columns:repeat(5,50px);gap:6px;justify-content:center;margin:15px;"></div>
+        <div style="margin:10px;"><button onclick="startMines()">Nouvelle Partie</button></div>
+        <button class="back-btn" onclick="backToMenu()">Retour</button>
+    </div>
+
+    <!-- Pong -->
+    <div class="game-container" id="pong">
+        <h2>🏓 Pong</h2>
+        <canvas id="pong-canvas" width="400" height="300" style="background:#111;border-radius:8px;display:block;margin:10px auto;"></canvas>
+        <div id="pong-status">Score: 0</div>
+        <div style="margin:10px;"><button onclick="startPong()">Commencer</button></div>
+        <button class="back-btn" onclick="backToMenu()">Retour</button>
+    </div>
+
+    <!-- Color Match -->
+    <div class="game-container" id="colormatch">
+        <h2>🎨 Color Match</h2>
+        <div id="colormatch-question" style="font-size:1.2em;margin:10px;">Appuie sur Commencer</div>
+        <div id="colormatch-buttons" style="display:flex;gap:8px;justify-content:center;margin:15px;"></div>
+        <div id="colormatch-status">Score: 0</div>
+        <div style="margin:10px;"><button onclick="startColorMatch()">Commencer</button></div>
+        <button class="back-btn" onclick="backToMenu()">Retour</button>
+    </div>
+
+    <!-- Target Practice -->
+    <div class="game-container" id="target">
+        <h2>🎯 Target Practice</h2>
+        <div id="target-status">Score: 0</div>
+        <div id="target-grid" style="display:grid;grid-template-columns:repeat(3,120px);gap:10px;justify-content:center;margin:15px;"></div>
+        <div style="margin:10px;"><button onclick="startTarget()">Commencer</button></div>
+        <button class="back-btn" onclick="backToMenu()">Retour</button>
+    </div>
+
+    <!-- Number Zap -->
+    <div class="game-container" id="numzap">
+        <h2>🔢 Number Zap</h2>
+        <div id="numzap-status">Clique 1 → 16</div>
+        <div id="numzap-grid" style="display:grid;grid-template-columns:repeat(4,80px);gap:8px;justify-content:center;margin:15px;"></div>
+        <div style="margin:10px;"><button onclick="startNumZap()">Nouvelle Partie</button></div>
+        <button class="back-btn" onclick="backToMenu()">Retour</button>
+    </div>
+
+    <!-- Simon Reverse -->
+    <div class="game-container" id="simonrev">
+        <h2>🔁 Simon Reverse</h2>
+        <div id="simonrev-status">Appuie sur Commencer</div>
+        <div style="display:flex;gap:10px;justify-content:center;margin:15px;">
+            <div id="simonrev-0" style="width:70px;height:70px;border-radius:10px;background:#e74c3c;cursor:pointer"></div>
+            <div id="simonrev-1" style="width:70px;height:70px;border-radius:10px;background:#f1c40f;cursor:pointer"></div>
+            <div id="simonrev-2" style="width:70px;height:70px;border-radius:10px;background:#2ecc71;cursor:pointer"></div>
+            <div id="simonrev-3" style="width:70px;height:70px;border-radius:10px;background:#3498db;cursor:pointer"></div>
+        </div>
+        <button onclick="startSimonRev()">Commencer</button>
+        <button class="back-btn" onclick="backToMenu()">Retour</button>
+    </div>
+
+    <!-- Reflex Sprint -->
+    <div class="game-container" id="reflexsprint">
+        <h2>⚡ Reflex Sprint</h2>
+        <div id="reflexsprint-status">Fais 5 rounds</div>
+        <div id="reflexsprint-box" style="width:200px;height:80px;background:#ccc;border-radius:6px;display:flex;align-items:center;justify-content:center;margin:15px;">Prêt ?</div>
+        <div style="margin:10px;"><button onclick="startReflexSprint()">Commencer</button></div>
+        <button class="back-btn" onclick="backToMenu()">Retour</button>
+    </div>
+
     <script>
         // Navigation
         function showGame(gameId) {
@@ -590,7 +740,7 @@
             clickerRunning = false;
             reactionRunning = false;
             spamRunning = false;
-            // Nouveaux jeux
+            // Existing small games
             rpsPlaying = false;
             guessRunning = false;
             simonRunning = false;
@@ -603,6 +753,19 @@
             dinoRunning = false;
             breakoutRunning = false;
             flappyRunning = false;
+            // Previously added games
+            puzzle15Running = false;
+            lightsOutRunning = false;
+            bubbleRunning = false;
+            game2048Running = false;
+            minesRunning = false;
+            pongRunning = false;
+            colormatchRunning = false;
+            // Newly added games
+            targetRunning = false;
+            numzapRunning = false;
+            simonrevRunning = false;
+            reflexsprintRunning = false;
         }
 
         // CLICKER GAME
@@ -1888,6 +2051,254 @@
                 if(flappyRunning) requestAnimationFrame(draw);
             }
             draw();
+        }
+
+        // --- NEW MINI-GAMES: Puzzle15, Lights Out, Bubble Pop ---
+
+        // PUZZLE 15
+        let puzzle15State = [];
+        function startPuzzle15(){
+            // create solved state
+            puzzle15State = Array.from({length:16},(_,i)=>i<15?i+1:0);
+            // shuffle by making legal random moves from solved state
+            for(let k=0;k<300;k++){
+                const empty = puzzle15State.indexOf(0);
+                const r = Math.floor(empty/4), c = empty%4;
+                const moves = [];
+                if(r>0) moves.push((r-1)*4+c);
+                if(r<3) moves.push((r+1)*4+c);
+                if(c>0) moves.push(r*4+(c-1));
+                if(c<3) moves.push(r*4+(c+1));
+                const m = moves[Math.floor(Math.random()*moves.length)];
+                puzzle15State[empty]=puzzle15State[m]; puzzle15State[m]=0;
+            }
+            document.getElementById('puzzle15-status').textContent='Remets les tuiles dans l\'ordre.';
+            renderPuzzle15();
+        }
+        function renderPuzzle15(){
+            const grid = document.getElementById('puzzle15-grid');
+            grid.innerHTML='';
+            puzzle15State.forEach((v,i)=>{
+                const el = document.createElement('div');
+                el.style.width='80px'; el.style.height='80px'; el.style.display='flex'; el.style.alignItems='center'; el.style.justifyContent='center'; el.style.background=v? '#fff':'transparent'; el.style.border='1px solid #333'; el.style.fontSize='1.2em'; el.style.cursor=v?'pointer':'default';
+                el.textContent = v? v : '';
+                el.onclick = ()=>{
+                    if(!v) return;
+                    const empty = puzzle15State.indexOf(0);
+                    const r1 = Math.floor(i/4), c1 = i%4;
+                    const r2 = Math.floor(empty/4), c2 = empty%4;
+                    const manh = Math.abs(r1-r2)+Math.abs(c1-c2);
+                    if(manh===1){ puzzle15State[empty]=puzzle15State[i]; puzzle15State[i]=0; renderPuzzle15(); checkPuzzle15Win(); }
+                };
+                grid.appendChild(el);
+            });
+        }
+        function checkPuzzle15Win(){
+            for(let i=0;i<15;i++) if(puzzle15State[i]!==i+1) return;
+            document.getElementById('puzzle15-status').textContent='🎉 Tu as gagné !';
+        }
+
+        // LIGHTS OUT (5x5)
+        let lightsOutState = [];
+        function startLightsOut(){
+            lightsOutState = Array.from({length:25},()=>Math.random()<0.5?1:0);
+            document.getElementById('lightsout-status').textContent='Éteins toutes les lumières.';
+            renderLightsOut();
+        }
+        function renderLightsOut(){
+            const grid = document.getElementById('lightsout-grid'); grid.innerHTML='';
+            lightsOutState.forEach((on,i)=>{
+                const btn = document.createElement('div');
+                btn.style.width='60px'; btn.style.height='60px'; btn.style.display='flex'; btn.style.alignItems='center'; btn.style.justifyContent='center'; btn.style.cursor='pointer'; btn.style.borderRadius='6px'; btn.style.background = on? '#ffd54f' : '#444';
+                btn.onclick = ()=>{ toggleLight(i); };
+                grid.appendChild(btn);
+            });
+        }
+        function toggleLight(i){
+            const r = Math.floor(i/5), c = i%5;
+            const idxs = [i, (r>0?i-5:null), (r<4?i+5:null), (c>0?i-1:null), (c<4?i+1:null)].filter(x=>x!==null);
+            idxs.forEach(ix=> lightsOutState[ix] = lightsOutState[ix]?0:1);
+            renderLightsOut();
+            if(lightsOutState.every(v=>v===0)) document.getElementById('lightsout-status').textContent='🎉 Gagné !';
+        }
+
+        // BUBBLE POP
+        let bubbleScore = 0;
+        let bubbleTimer = null;
+        function startBubblePop(){
+            const grid = document.getElementById('bubble-grid'); grid.innerHTML=''; bubbleScore = 0; document.getElementById('bubble-status').textContent='Score: 0';
+            for(let i=0;i<30;i++){
+                const b = document.createElement('div');
+                b.style.width='60px'; b.style.height='60px'; b.style.borderRadius='50%'; b.style.background='#7f8c8d'; b.style.display='flex'; b.style.alignItems='center'; b.style.justifyContent='center'; b.style.cursor='pointer'; b.textContent='';
+                b.onclick = ()=>{ if(b.dataset.popped==='1') return; b.dataset.popped='1'; b.style.visibility='hidden'; bubbleScore++; document.getElementById('bubble-status').textContent='Score: '+bubbleScore; };
+                grid.appendChild(b);
+            }
+            // timer 20s
+            clearTimeout(bubbleTimer);
+            bubbleTimer = setTimeout(()=>{ alert('Fin! Score: '+bubbleScore); },20000);
+        }
+
+        // --- ADDITIONAL GAMES JS ---
+
+        // 2048 (simple)
+        let g2048 = Array(16).fill(0);
+        let g2048Score = 0;
+        function start2048(){
+            g2048 = Array(16).fill(0); g2048Score = 0; game2048Running = true;
+            spawn2048(); spawn2048(); render2048();
+            document.getElementById('g2048-status').textContent = `Score: ${g2048Score}`;
+        }
+        function spawn2048(){
+            const empties = g2048.map((v,i)=>v===0?i:null).filter(i=>i!==null);
+            if(empties.length===0) return;
+            const idx = empties[Math.floor(Math.random()*empties.length)];
+            g2048[idx] = Math.random()<0.9?2:4;
+        }
+        function render2048(){
+            const grid = document.getElementById('g2048-grid'); grid.innerHTML='';
+            g2048.forEach(v=>{ const el=document.createElement('div'); el.style.width='80px'; el.style.height='80px'; el.style.display='flex'; el.style.alignItems='center'; el.style.justifyContent='center'; el.style.background=v? '#f1c40f':'#ddd'; el.style.border='1px solid #999'; el.style.fontSize='1.2em'; el.textContent = v||''; grid.appendChild(el); });
+        }
+        function move2048(dir){
+            // dir: 'L','R','U','D'
+            let moved=false;
+            const get = (r,c)=>g2048[r*4+c];
+            const set = (r,c,v)=>{ g2048[r*4+c]=v; };
+            if(dir==='L' || dir==='R'){
+                for(let r=0;r<4;r++){
+                    let row = [];
+                    for(let c=0;c<4;c++) row.push(get(r,c));
+                    if(dir==='R') row.reverse();
+                    const compressed = [];
+                    for(let i=0;i<4;i++) if(row[i]) compressed.push(row[i]);
+                    for(let i=0;i<compressed.length-1;i++){
+                        if(compressed[i]===compressed[i+1]){ compressed[i]*=2; g2048Score+=compressed[i]; compressed.splice(i+1,1); }
+                    }
+                    while(compressed.length<4) compressed.push(0);
+                    if(dir==='R') compressed.reverse();
+                    for(let c=0;c<4;c++) if(get(r,c)!==compressed[c]) moved=true;
+                    for(let c=0;c<4;c++) set(r,c,compressed[c]);
+                }
+            } else {
+                for(let c=0;c<4;c++){
+                    let col = [];
+                    for(let r=0;r<4;r++) col.push(get(r,c));
+                    if(dir==='D') col.reverse();
+                    const compressed=[]; for(let i=0;i<4;i++) if(col[i]) compressed.push(col[i]);
+                    for(let i=0;i<compressed.length-1;i++){ if(compressed[i]===compressed[i+1]){ compressed[i]*=2; g2048Score+=compressed[i]; compressed.splice(i+1,1); } }
+                    while(compressed.length<4) compressed.push(0);
+                    if(dir==='D') compressed.reverse();
+                    for(let r=0;r<4;r++) if(get(r,c)!==compressed[r]) moved=true;
+                    for(let r=0;r<4;r++) set(r,c,compressed[r]);
+                }
+            }
+            if(moved){ spawn2048(); render2048(); document.getElementById('g2048-status').textContent = `Score: ${g2048Score}`; check2048End(); }
+        }
+        function check2048End(){ if(g2048.includes(2048)){ alert('🎉 Tu as atteint 2048 !'); game2048Running=false; } else if(g2048.every(v=>v!==0) && !canMove2048()){ alert('Perdu !'); game2048Running=false; } }
+        function canMove2048(){ for(let r=0;r<4;r++) for(let c=0;c<4;c++){ const v=g2048[r*4+c]; if((c<3 && g2048[r*4+c+1]===v)||(r<3 && g2048[(r+1)*4+c]===v)) return true; } return false; }
+        document.addEventListener('keydown', (e)=>{ if(!game2048Running) return; if(e.key==='ArrowLeft') move2048('L'); if(e.key==='ArrowRight') move2048('R'); if(e.key==='ArrowUp') move2048('U'); if(e.key==='ArrowDown') move2048('D'); });
+
+        // MINESWEEPER (5x5)
+        let minesGrid=[], minesRevealed=[]; let minesCount=5;
+        function startMines(){
+            minesGrid = Array(25).fill(0); minesRevealed = Array(25).fill(false); minesRunning=true;
+            // place bombs
+            let placed=0; while(placed<minesCount){ const i=Math.floor(Math.random()*25); if(minesGrid[i]===-1) continue; minesGrid[i]=-1; placed++; }
+            // numbers
+            for(let i=0;i<25;i++) if(minesGrid[i]!==-1){ let n=0; const r=Math.floor(i/5), c=i%5; for(let dr=-1;dr<=1;dr++) for(let dc=-1;dc<=1;dc++){ const rr=r+dr, cc=c+dc; if(rr>=0&&rr<5&&cc>=0&&cc<5){ if(minesGrid[rr*5+cc]===-1) n++; } } minesGrid[i]=n; }
+            document.getElementById('mines-status').textContent='Bonne chance.'; renderMines();
+        }
+        function renderMines(){ const grid=document.getElementById('mines-grid'); grid.innerHTML=''; minesGrid.forEach((v,i)=>{ const b=document.createElement('div'); b.style.width='50px'; b.style.height='50px'; b.style.display='flex'; b.style.alignItems='center'; b.style.justifyContent='center'; b.style.background= minesRevealed[i] ? '#eee':'#777'; b.style.cursor='pointer'; b.style.border='1px solid #333'; if(minesRevealed[i]) b.textContent = v===-1? '💣': (v? v : ''); b.onclick = ()=> revealM(i); grid.appendChild(b); }); }
+        function revealM(i){ if(minesRevealed[i]||!minesRunning) return; minesRevealed[i]=true; if(minesGrid[i]===-1){ // lost
+                minesRunning=false; document.getElementById('mines-status').textContent='💥 Perdu !'; revealAllM(); return; }
+            if(minesGrid[i]===0){ // flood
+                const r=Math.floor(i/5), c=i%5; for(let dr=-1;dr<=1;dr++) for(let dc=-1;dc<=1;dc++){ const rr=r+dr, cc=c+dc; if(rr>=0&&rr<5&&cc>=0&&cc<5){ const idx=rr*5+cc; if(!minesRevealed[idx]) revealM(idx); } }
+            }
+            renderMines(); checkMinesWin(); }
+        function revealAllM(){ minesRevealed = minesGrid.map(()=>true); renderMines(); }
+        function checkMinesWin(){ if(minesRevealed.filter(x=>x).length === 25 - minesCount){ minesRunning=false; document.getElementById('mines-status').textContent='🎉 Gagné !'; } }
+
+        // PONG (simple single-player)
+        let pongAni=null; let pongScore=0;
+        function startPong(){ pongRunning=true; pongScore=0; const canvas=document.getElementById('pong-canvas'); const ctx=canvas.getContext('2d'); let paddleX=canvas.width/2-40; let ball={x:canvas.width/2,y:canvas.height/2,vx:3,vy:-3}; canvas.onmousemove = (e)=>{ const r=canvas.getBoundingClientRect(); paddleX = e.clientX - r.left - 40; if(paddleX<0) paddleX=0; if(paddleX>canvas.width-80) paddleX=canvas.width-80; };
+            function loop(){ ctx.clearRect(0,0,canvas.width,canvas.height); // paddle
+                ctx.fillStyle='#fff'; ctx.fillRect(paddleX, canvas.height-20, 80, 10); // ball
+                ctx.beginPath(); ctx.arc(ball.x, ball.y, 8,0,Math.PI*2); ctx.fill(); ball.x+=ball.vx; ball.y+=ball.vy;
+                if(ball.x<8||ball.x>canvas.width-8) ball.vx*=-1; if(ball.y<8) ball.vy*=-1;
+                if(ball.y+8 >= canvas.height-20 && ball.x>paddleX && ball.x<paddleX+80){ ball.vy*=-1; pongScore++; document.getElementById('pong-status').textContent = 'Score: '+pongScore; }
+                if(ball.y>canvas.height){ cancelAnimationFrame(pongAni); pongRunning=false; alert('Game over! Score: '+pongScore); return; }
+                pongAni = requestAnimationFrame(loop);
+            }
+            loop(); }
+
+        // COLOR MATCH
+        const cmColors = ['red','green','blue','yellow','purple'];
+        let cmScore=0;
+        function startColorMatch(){ colormatchRunning=true; cmScore=0; renderColorButtons(); nextColorRound(); }
+        function renderColorButtons(){ const wrap=document.getElementById('colormatch-buttons'); wrap.innerHTML=''; cmColors.forEach(c=>{ const b=document.createElement('button'); b.textContent=c; b.style.background=c; b.style.color='#000'; b.style.padding='8px 12px'; b.onclick=()=>{ if(!colormatchRunning) return; if(c===currentColorAnswer){ cmScore++; document.getElementById('colormatch-status').textContent='Score: '+cmScore; nextColorRound(); } else { colormatchRunning=false; alert('Perdu! Score: '+cmScore); } }; wrap.appendChild(b); }); }
+        let currentColorAnswer='';
+        function nextColorRound(){ const word = cmColors[Math.floor(Math.random()*cmColors.length)]; const displayColor = cmColors[Math.floor(Math.random()*cmColors.length)]; currentColorAnswer = word; const q = document.getElementById('colormatch-question'); q.textContent = word.toUpperCase(); q.style.color = displayColor; }
+
+        // TARGET PRACTICE, NUMBER ZAP, SIMON REVERSE, REFLEX SPRINT
+
+        // TARGET PRACTICE
+        let targetScore = 0;
+        let targetInterval = null;
+        let targetRunning = false;
+        function startTarget(){
+            const grid = document.getElementById('target-grid'); grid.innerHTML=''; targetScore=0; document.getElementById('target-status').textContent='Score: 0';
+            for(let i=0;i<9;i++){ const cell=document.createElement('div'); cell.style.width='120px'; cell.style.height='80px'; cell.style.background='#95a5a6'; cell.style.borderRadius='8px'; cell.style.display='flex'; cell.style.alignItems='center'; cell.style.justifyContent='center'; cell.style.cursor='pointer'; cell.dataset.has='0'; cell.onclick=()=>{ if(cell.dataset.has==='1'){ targetScore++; cell.dataset.has='0'; cell.textContent=''; document.getElementById('target-status').textContent='Score: '+targetScore; } }; grid.appendChild(cell); }
+            targetRunning=true;
+            targetInterval = setInterval(()=>{
+                const cells = Array.from(document.getElementById('target-grid').children);
+                cells.forEach(c=>{ c.dataset.has='0'; c.textContent=''; });
+                const idx = Math.floor(Math.random()*cells.length);
+                const t = cells[idx]; t.dataset.has='1'; t.textContent='🎯';
+                setTimeout(()=>{ if(t.dataset.has==='1'){ t.dataset.has='0'; t.textContent=''; } },700);
+            },700);
+            setTimeout(()=>{ clearInterval(targetInterval); targetRunning=false; alert('Fin! Score: '+targetScore); },20000);
+        }
+
+        // NUMBER ZAP (click numbers 1..16 in order)
+        let numzapExpected = 1;
+        let numzapRunning = false;
+        function startNumZap(){
+            const grid=document.getElementById('numzap-grid'); grid.innerHTML=''; const nums = Array.from({length:16},(_,i)=>i+1).sort(()=>Math.random()-0.5);
+            numzapExpected=1; numzapRunning=true; document.getElementById('numzap-status').textContent='Clique 1 → 16';
+            nums.forEach(n=>{ const b=document.createElement('div'); b.style.width='80px'; b.style.height='80px'; b.style.display='flex'; b.style.alignItems='center'; b.style.justifyContent='center'; b.style.background='#fff'; b.style.border='1px solid #333'; b.style.cursor='pointer'; b.textContent=n; b.onclick=()=>{ if(!numzapRunning) return; if(n===numzapExpected){ b.style.visibility='hidden'; numzapExpected++; if(numzapExpected>16){ numzapRunning=false; alert('🎉 Gagné !'); } } else { numzapRunning=false; alert('Mauvais! Tu as cliqué '+n); } }; grid.appendChild(b); });
+        }
+
+        // SIMON REVERSE
+        let simonRevSeq = [];
+        let simonRevPlayer = [];
+        let simonrevRunning = false;
+        function startSimonRev(){
+            simonRevSeq = [];
+            simonRevPlayer = [];
+            simonRevRound();
+        }
+        function simonRevRound(){
+            const next = Math.floor(Math.random()*4);
+            simonRevSeq.push(next);
+            document.getElementById('simonrev-status').textContent = `Round ${simonRevSeq.length} — Observe`;
+            playSimonRevSequence(0);
+        }
+        function playSimonRevSequence(i){
+            if(i>=simonRevSeq.length){ simonRevPlayer = []; simonrevRunning = true; document.getElementById('simonrev-status').textContent='À toi (à l\'envers)'; return; }
+            const idx = simonRevSeq[i]; const el = document.getElementById('simonrev-'+idx); el.style.filter='brightness(1.6)'; setTimeout(()=>{ el.style.filter=''; playSimonRevSequence(i+1); },600);
+        }
+        document.getElementById('simonrev-0').onclick = ()=>simonRevClick(0);
+        document.getElementById('simonrev-1').onclick = ()=>simonRevClick(1);
+        document.getElementById('simonrev-2').onclick = ()=>simonRevClick(2);
+        document.getElementById('simonrev-3').onclick = ()=>simonRevClick(3);
+        function simonRevClick(i){ if(!simonrevRunning) return; simonRevPlayer.push(i); const el=document.getElementById('simonrev-'+i); el.style.transform='scale(1.05)'; setTimeout(()=>el.style.transform='',150); const pos = simonRevPlayer.length-1; // check against reverse
+            const expected = simonRevSeq[simonRevSeq.length-1-pos]; if(simonRevPlayer[pos] !== expected){ simonrevRunning=false; document.getElementById('simonrev-status').textContent='❌ Raté !'; return; } if(simonRevPlayer.length === simonRevSeq.length){ simonrevRunning=false; document.getElementById('simonrev-status').textContent='✅ Bien joué !'; setTimeout(simonRevRound,700); } }
+
+        // REFLEX SPRINT (5 rounds)
+        let reflexRound = 0;
+        let reflexsprintRunning = false;
+        function startReflexSprint(){ reflexRound=0; reflexsprintRunning=true; reflexNext(); }
+        function reflexNext(){ if(!reflexsprintRunning) return; reflexRound++; if(reflexRound>5){ reflexsprintRunning=false; alert('Série terminée !'); return; } const box=document.getElementById('reflexsprint-box'); box.style.background='#ccc'; box.textContent='Prêt...'; document.getElementById('reflexsprint-status').textContent=`Round ${reflexRound}/5`;
+            const delay = Math.random()*2000+800; setTimeout(()=>{ box.style.background='lightgreen'; box.textContent='CLIQUE !'; const start=Date.now(); box.onclick = ()=>{ const t = Date.now()-start; box.onclick=null; box.style.background='#ccc'; box.textContent=`${t}ms`; setTimeout(reflexNext,600); }; }, delay);
         }
 
         startCheckers();
