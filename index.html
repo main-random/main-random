@@ -515,6 +515,425 @@
         .crash-display.crashed {
             color: #e74c3c;
         }
+
+        /* Casino Mines */
+        .casino-mines-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 60px);
+            gap: 8px;
+            justify-content: center;
+            margin: 15px auto;
+        }
+
+        .casino-mine-cell {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            border-radius: 10px;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8em;
+            transition: transform 0.2s, background 0.3s;
+            color: white;
+        }
+
+        .casino-mine-cell:hover:not(.revealed) {
+            transform: scale(1.1);
+            background: linear-gradient(135deg, #2ecc71, #27ae60);
+        }
+
+        .casino-mine-cell.revealed {
+            cursor: default;
+        }
+
+        .casino-mine-cell.safe {
+            background: linear-gradient(135deg, #2ecc71, #27ae60);
+        }
+
+        .casino-mine-cell.bomb {
+            background: linear-gradient(135deg, #e74c3c, #c0392b);
+        }
+
+        /* Wheel of Fortune */
+        .fortune-wheel-container {
+            position: relative;
+            width: 280px;
+            height: 280px;
+            margin: 20px auto;
+        }
+
+        .fortune-wheel {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            border: 6px solid #ffd700;
+            transition: transform 4s cubic-bezier(0.17, 0.67, 0.12, 0.99);
+        }
+
+        .fortune-pointer {
+            width: 0;
+            height: 0;
+            border-left: 15px solid transparent;
+            border-right: 15px solid transparent;
+            border-top: 30px solid #ffd700;
+            position: absolute;
+            top: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 10;
+        }
+
+        /* Video Poker */
+        .poker-hand {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin: 15px 0;
+            flex-wrap: wrap;
+        }
+
+        .poker-card {
+            width: 80px;
+            height: 110px;
+            background: white;
+            border-radius: 10px;
+            border: 3px solid #333;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.2s, border-color 0.2s;
+            position: relative;
+        }
+
+        .poker-card.held {
+            border-color: #2ecc71;
+            transform: translateY(-10px);
+        }
+
+        .poker-card .held-badge {
+            position: absolute;
+            top: -8px;
+            background: #2ecc71;
+            color: white;
+            font-size: 0.6em;
+            padding: 2px 6px;
+            border-radius: 4px;
+        }
+
+        /* Dragon Tower */
+        .tower-grid {
+            display: flex;
+            flex-direction: column-reverse;
+            gap: 6px;
+            margin: 15px auto;
+            max-width: 300px;
+        }
+
+        .tower-row {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 6px;
+        }
+
+        .tower-cell {
+            height: 45px;
+            background: linear-gradient(135deg, #8e44ad, #9b59b6);
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3em;
+            color: white;
+            transition: transform 0.2s, background 0.3s;
+        }
+
+        .tower-cell:hover:not(.revealed) {
+            transform: scale(1.05);
+            background: linear-gradient(135deg, #9b59b6, #af7ac5);
+        }
+
+        .tower-cell.revealed {
+            cursor: default;
+        }
+
+        .tower-cell.safe {
+            background: linear-gradient(135deg, #2ecc71, #27ae60);
+        }
+
+        .tower-cell.danger {
+            background: linear-gradient(135deg, #e74c3c, #c0392b);
+        }
+
+        /* Limbo */
+        .limbo-display {
+            font-size: 4em;
+            font-weight: bold;
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .limbo-target-input {
+            padding: 10px;
+            font-size: 1.5em;
+            border-radius: 8px;
+            border: 2px solid #ffd700;
+            width: 120px;
+            text-align: center;
+            margin: 10px;
+        }
+
+        /* Multiplier badge */
+        .multiplier-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #f1c40f, #f39c12);
+            color: #333;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 1.4em;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+
+        /* Common game element styles */
+        .game-grid-cell {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            border-radius: 8px;
+        }
+
+        .mole-cell {
+            width: 120px;
+            height: 80px;
+            background: #95a5a6;
+        }
+
+        .game-input {
+            padding: 10px;
+            border-radius: 6px;
+            font-size: 1em;
+            margin: 10px;
+            border: 2px solid #ddd;
+            font-family: 'Comic Sans MS', cursive;
+        }
+
+        .tile-cell {
+            width: 80px;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #fff;
+            border: 1px solid #333;
+            font-size: 1.2em;
+            cursor: pointer;
+        }
+
+        .light-cell {
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            border-radius: 6px;
+        }
+
+        .light-cell.on { background: #ffd54f; }
+        .light-cell.off { background: #444; }
+
+        .mine-cell {
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            border: 1px solid #333;
+        }
+
+        .mine-cell.hidden { background: #777; }
+        .mine-cell.shown { background: #eee; }
+
+        .bubble-cell {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: #7f8c8d;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+
+        .game-canvas {
+            border-radius: 8px;
+            display: block;
+            margin: 10px auto;
+        }
+
+        .center-flex {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin: 15px;
+        }
+
+        .game-actions {
+            margin: 10px;
+            text-align: center;
+        }
+
+        .simon-btn {
+            width: 80px;
+            height: 80px;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+
+        .simon-btn-sm {
+            width: 70px;
+            height: 70px;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+
+        .mole-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 120px);
+            gap: 10px;
+            justify-content: center;
+            margin: 15px auto;
+        }
+
+        .hangman-word {
+            font-size: 2em;
+            margin: 15px;
+        }
+
+        .slot-reels {
+            font-size: 2em;
+            margin: 15px;
+        }
+
+        .quiz-question {
+            font-size: 1.5em;
+            margin: 15px;
+        }
+
+        .puzzle-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 80px);
+            gap: 8px;
+            justify-content: center;
+            margin: 15px;
+        }
+
+        .lightsout-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 60px);
+            gap: 6px;
+            justify-content: center;
+            margin: 15px;
+        }
+
+        .bubble-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            justify-content: center;
+            margin: 15px;
+            max-width: 520px;
+        }
+
+        .g2048-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 80px);
+            gap: 8px;
+            justify-content: center;
+            margin: 15px;
+        }
+
+        .mines-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 50px);
+            gap: 6px;
+            justify-content: center;
+            margin: 15px;
+        }
+
+        .target-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 120px);
+            gap: 10px;
+            justify-content: center;
+            margin: 15px;
+        }
+
+        .numzap-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 80px);
+            gap: 8px;
+            justify-content: center;
+            margin: 15px;
+        }
+
+        .reflex-box {
+            width: 200px;
+            height: 80px;
+            background: #ccc;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 15px auto;
+        }
+
+        .colormatch-question {
+            font-size: 1.2em;
+            margin: 10px;
+        }
+
+        .colormatch-buttons {
+            display: flex;
+            gap: 8px;
+            justify-content: center;
+            margin: 15px;
+        }
+
+        #pong-canvas {
+            background: #111;
+        }
+
+        #snake-canvas {
+            background: #ecf0f1;
+        }
+
+        #racing-canvas {
+            background: linear-gradient(to bottom, #87ceeb, #e0f6ff);
+        }
+
+        #dino-canvas {
+            background: #c1b5a8;
+        }
+
+        #breakout-canvas {
+            background: #222;
+        }
+
+        #flappy-canvas {
+            background: linear-gradient(to bottom, #87ceeb, #e0f6ff);
+        }
     </style>
 </head>
 <body>
@@ -727,7 +1146,7 @@
     <div class="game-container" id="rps">
         <h2>✂️ Pierre-Feuille-Ciseaux</h2>
         <div class="game-status" id="rps-result">Choisis une option</div>
-        <div style="margin:15px;"> 
+        <div class="center-flex"> 
             <button onclick="playRPS('rock')">🪨 Pierre</button>
             <button onclick="playRPS('paper')">📄 Feuille</button>
             <button onclick="playRPS('scissors')">✂️ Ciseaux</button>
@@ -739,8 +1158,8 @@
     <div class="game-container" id="guess">
         <h2>❓ Devine le nombre</h2>
         <div class="game-status" id="guess-status">Je pense à un nombre entre 1 et 100.</div>
-        <input id="guess-input" type="number" placeholder="Ton choix" style="padding:10px;margin:10px;border-radius:6px;font-size:1em;">
-        <div style="margin:10px;"><button onclick="submitGuess()">Proposer</button><button onclick="startGuess()">Nouvelle Partie</button></div>
+        <input id="guess-input" type="number" placeholder="Ton choix" class="game-input">
+        <div class="game-actions"><button onclick="submitGuess()">Proposer</button><button onclick="startGuess()">Nouvelle Partie</button></div>
         <button class="back-btn" onclick="backToMenu()">Retour</button>
     </div>
 
@@ -748,11 +1167,11 @@
     <div class="game-container" id="simon">
         <h2>🔴 Simon Says</h2>
         <div class="game-status" id="simon-status">Appuie sur "Commencer"</div>
-        <div style="display:flex;gap:10px;justify-content:center;margin:15px;">
-            <div id="simon-0" style="width:80px;height:80px;border-radius:10px;background:#e74c3c;cursor:pointer"></div>
-            <div id="simon-1" style="width:80px;height:80px;border-radius:10px;background:#f1c40f;cursor:pointer"></div>
-            <div id="simon-2" style="width:80px;height:80px;border-radius:10px;background:#2ecc71;cursor:pointer"></div>
-            <div id="simon-3" style="width:80px;height:80px;border-radius:10px;background:#3498db;cursor:pointer"></div>
+        <div class="center-flex">
+            <div id="simon-0" class="simon-btn" style="background:#e74c3c"></div>
+            <div id="simon-1" class="simon-btn" style="background:#f1c40f"></div>
+            <div id="simon-2" class="simon-btn" style="background:#2ecc71"></div>
+            <div id="simon-3" class="simon-btn" style="background:#3498db"></div>
         </div>
         <button onclick="startSimon()">Commencer</button>
         <button class="back-btn" onclick="backToMenu()">Retour</button>
@@ -762,7 +1181,7 @@
     <div class="game-container" id="mole">
         <h2>🦫 Whack-a-Mole</h2>
         <div class="game-status" id="mole-status">Score: 0</div>
-        <div id="mole-grid" style="display:grid;grid-template-columns:repeat(3,120px);gap:10px;justify-content:center;margin:15px;"></div>
+        <div id="mole-grid" class="mole-grid"></div>
         <button onclick="startMole()">Commencer</button>
         <button class="back-btn" onclick="backToMenu()">Retour</button>
     </div>
@@ -771,17 +1190,17 @@
     <div class="game-container" id="hangman">
         <h2>🔤 Pendu</h2>
         <div class="game-status" id="hangman-status">Appuie sur "Nouvelle Partie" pour commencer.</div>
-        <div id="hangman-word" style="font-size:2em;margin:15px;"></div>
-        <input id="hangman-input" maxlength="1" placeholder="Lettre" style="padding:8px;border-radius:6px;margin:10px;">
-        <div style="margin:10px;"><button onclick="guessLetter()">Proposer</button><button onclick="startHangman()">Nouvelle Partie</button></div>
+        <div id="hangman-word" class="hangman-word"></div>
+        <input id="hangman-input" maxlength="1" placeholder="Lettre" class="game-input">
+        <div class="game-actions"><button onclick="guessLetter()">Proposer</button><button onclick="startHangman()">Nouvelle Partie</button></div>
         <button class="back-btn" onclick="backToMenu()">Retour</button>
     </div>
 
     <!-- Slot Machine -->
     <div class="game-container" id="slot">
         <h2>🎰 Machine à sous</h2>
-        <div id="slot-reels" style="font-size:2em;margin:15px;">- - -</div>
-        <div style="margin:10px;"><button onclick="spinSlot()">Tirer</button></div>
+        <div id="slot-reels" class="slot-reels">- - -</div>
+        <div class="game-actions"><button onclick="spinSlot()">Tirer</button></div>
         <div class="game-status" id="slot-status"></div>
         <button class="back-btn" onclick="backToMenu()">Retour</button>
     </div>
@@ -789,8 +1208,8 @@
     <!-- Snake -->
     <div class="game-container" id="snake">
         <h2>🐍 Snake</h2>
-        <canvas id="snake-canvas" width="300" height="300" style="background:#ecf0f1;border-radius:8px;display:block;margin:10px auto;"></canvas>
-        <div style="text-align:center;"><button onclick="startSnake()">Commencer</button></div>
+        <canvas id="snake-canvas" width="300" height="300" class="game-canvas"></canvas>
+        <div class="game-actions"><button onclick="startSnake()">Commencer</button></div>
         <div class="game-status" id="snake-status"></div>
         <button class="back-btn" onclick="backToMenu()">Retour</button>
     </div>
@@ -798,9 +1217,9 @@
     <!-- Math Quiz -->
     <div class="game-container" id="quiz">
         <h2>➗ Math Quiz</h2>
-        <div id="quiz-question" style="font-size:1.5em;margin:15px;">Prêt ?</div>
-        <input id="quiz-input" type="number" style="padding:8px;border-radius:6px;margin:5px;">
-        <div style="margin:10px;"><button onclick="submitQuiz()">Valider</button><button onclick="nextQuiz()">Question suivante</button></div>
+        <div id="quiz-question" class="quiz-question">Prêt ?</div>
+        <input id="quiz-input" type="number" class="game-input">
+        <div class="game-actions"><button onclick="submitQuiz()">Valider</button><button onclick="nextQuiz()">Question suivante</button></div>
         <div class="game-status" id="quiz-status"></div>
         <button class="back-btn" onclick="backToMenu()">Retour</button>
     </div>
@@ -808,7 +1227,7 @@
     <!-- Racing Game -->
     <div class="game-container" id="racing">
         <h2>🏎️ Racing 2D</h2>
-        <canvas id="racing-canvas" width="400" height="500" style="background:linear-gradient(to bottom, #87ceeb, #e0f6ff);border-radius:8px;display:block;margin:10px auto;"></canvas>
+        <canvas id="racing-canvas" width="400" height="500" class="game-canvas"></canvas>
         <div class="game-status" id="racing-status">Score: 0</div>
         <button onclick="startRacing()">Commencer</button>
         <button class="back-btn" onclick="backToMenu()">Retour</button>
@@ -817,7 +1236,7 @@
     <!-- Dinosaur Runner -->
     <div class="game-container" id="dino">
         <h2>🦖 Dinosaur Runner</h2>
-        <canvas id="dino-canvas" width="600" height="200" style="background:#c1b5a8;border-radius:8px;display:block;margin:10px auto;"></canvas>
+        <canvas id="dino-canvas" width="600" height="200" class="game-canvas"></canvas>
         <div class="game-status" id="dino-status">Score: 0 | Appuie sur ESPACE pour sauter</div>
         <button onclick="startDino()">Commencer</button>
         <button class="back-btn" onclick="backToMenu()">Retour</button>
@@ -826,7 +1245,7 @@
     <!-- Breakout/Cassé -->
     <div class="game-container" id="breakout">
         <h2>🧱 Cassé</h2>
-        <canvas id="breakout-canvas" width="480" height="320" style="background:#222;border-radius:8px;display:block;margin:10px auto;"></canvas>
+        <canvas id="breakout-canvas" width="480" height="320" class="game-canvas"></canvas>
         <div class="game-status" id="breakout-status">Score: 0</div>
         <button onclick="startBreakout()">Commencer</button>
         <button class="back-btn" onclick="backToMenu()">Retour</button>
@@ -835,7 +1254,7 @@
     <!-- Flappy Bird -->
     <div class="game-container" id="flappy">
         <h2>🐦 Flappy Bird</h2>
-        <canvas id="flappy-canvas" width="400" height="600" style="background:linear-gradient(to bottom, #87ceeb, #e0f6ff);border-radius:8px;display:block;margin:10px auto;"></canvas>
+        <canvas id="flappy-canvas" width="400" height="600" class="game-canvas"></canvas>
         <div class="game-status" id="flappy-status">Score: 0 | Clique pour sauter</div>
         <button onclick="startFlappy()">Commencer</button>
         <button class="back-btn" onclick="backToMenu()">Retour</button>
@@ -845,8 +1264,8 @@
     <div class="game-container" id="puzzle15">
         <h2>🔢 Puzzle 15</h2>
         <div id="puzzle15-status">Remets les tuiles dans l'ordre.</div>
-        <div id="puzzle15-grid" style="display:grid;grid-template-columns:repeat(4,80px);gap:8px;justify-content:center;margin:15px;"></div>
-        <div style="margin:10px;"><button onclick="startPuzzle15()">Nouvelle Partie</button></div>
+        <div id="puzzle15-grid" class="puzzle-grid"></div>
+        <div class="game-actions"><button onclick="startPuzzle15()">Nouvelle Partie</button></div>
         <button class="back-btn" onclick="backToMenu()">Retour</button>
     </div>
 
@@ -854,8 +1273,8 @@
     <div class="game-container" id="lightsout">
         <h2>💡 Lights Out</h2>
         <div id="lightsout-status">Éteins toutes les lumières.</div>
-        <div id="lightsout-grid" style="display:grid;grid-template-columns:repeat(5,60px);gap:6px;justify-content:center;margin:15px;"></div>
-        <div style="margin:10px;"><button onclick="startLightsOut()">Nouvelle Partie</button></div>
+        <div id="lightsout-grid" class="lightsout-grid"></div>
+        <div class="game-actions"><button onclick="startLightsOut()">Nouvelle Partie</button></div>
         <button class="back-btn" onclick="backToMenu()">Retour</button>
     </div>
 
@@ -863,8 +1282,8 @@
     <div class="game-container" id="bubble">
         <h2>🟦 Bubble Pop</h2>
         <div id="bubble-status">Score: 0</div>
-        <div id="bubble-grid" style="display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:15px;max-width:520px;"></div>
-        <div style="margin:10px;"><button onclick="startBubblePop()">Commencer</button></div>
+        <div id="bubble-grid" class="bubble-grid"></div>
+        <div class="game-actions"><button onclick="startBubblePop()">Commencer</button></div>
         <button class="back-btn" onclick="backToMenu()">Retour</button>
     </div>
 
@@ -872,8 +1291,8 @@
     <div class="game-container" id="game2048">
         <h2>🔢 2048</h2>
         <div id="g2048-status">Score: 0</div>
-        <div id="g2048-grid" style="display:grid;grid-template-columns:repeat(4,80px);gap:8px;justify-content:center;margin:15px;"></div>
-        <div style="margin:10px;"><button onclick="start2048()">Nouvelle Partie</button></div>
+        <div id="g2048-grid" class="g2048-grid"></div>
+        <div class="game-actions"><button onclick="start2048()">Nouvelle Partie</button></div>
         <button class="back-btn" onclick="backToMenu()">Retour</button>
     </div>
 
@@ -881,27 +1300,27 @@
     <div class="game-container" id="mines">
         <h2>💣 Minesweeper</h2>
         <div id="mines-status">Bonne chance.</div>
-        <div id="mines-grid" style="display:grid;grid-template-columns:repeat(5,50px);gap:6px;justify-content:center;margin:15px;"></div>
-        <div style="margin:10px;"><button onclick="startMines()">Nouvelle Partie</button></div>
+        <div id="mines-grid" class="mines-grid"></div>
+        <div class="game-actions"><button onclick="startMines()">Nouvelle Partie</button></div>
         <button class="back-btn" onclick="backToMenu()">Retour</button>
     </div>
 
     <!-- Pong -->
     <div class="game-container" id="pong">
         <h2>🏓 Pong</h2>
-        <canvas id="pong-canvas" width="400" height="300" style="background:#111;border-radius:8px;display:block;margin:10px auto;"></canvas>
+        <canvas id="pong-canvas" width="400" height="300" class="game-canvas"></canvas>
         <div id="pong-status">Score: 0</div>
-        <div style="margin:10px;"><button onclick="startPong()">Commencer</button></div>
+        <div class="game-actions"><button onclick="startPong()">Commencer</button></div>
         <button class="back-btn" onclick="backToMenu()">Retour</button>
     </div>
 
     <!-- Color Match -->
     <div class="game-container" id="colormatch">
         <h2>🎨 Color Match</h2>
-        <div id="colormatch-question" style="font-size:1.2em;margin:10px;">Appuie sur Commencer</div>
-        <div id="colormatch-buttons" style="display:flex;gap:8px;justify-content:center;margin:15px;"></div>
+        <div id="colormatch-question" class="colormatch-question">Appuie sur Commencer</div>
+        <div id="colormatch-buttons" class="colormatch-buttons"></div>
         <div id="colormatch-status">Score: 0</div>
-        <div style="margin:10px;"><button onclick="startColorMatch()">Commencer</button></div>
+        <div class="game-actions"><button onclick="startColorMatch()">Commencer</button></div>
         <button class="back-btn" onclick="backToMenu()">Retour</button>
     </div>
 
@@ -909,8 +1328,8 @@
     <div class="game-container" id="target">
         <h2>🎯 Target Practice</h2>
         <div id="target-status">Score: 0</div>
-        <div id="target-grid" style="display:grid;grid-template-columns:repeat(3,120px);gap:10px;justify-content:center;margin:15px;"></div>
-        <div style="margin:10px;"><button onclick="startTarget()">Commencer</button></div>
+        <div id="target-grid" class="target-grid"></div>
+        <div class="game-actions"><button onclick="startTarget()">Commencer</button></div>
         <button class="back-btn" onclick="backToMenu()">Retour</button>
     </div>
 
@@ -918,8 +1337,8 @@
     <div class="game-container" id="numzap">
         <h2>🔢 Number Zap</h2>
         <div id="numzap-status">Clique 1 → 16</div>
-        <div id="numzap-grid" style="display:grid;grid-template-columns:repeat(4,80px);gap:8px;justify-content:center;margin:15px;"></div>
-        <div style="margin:10px;"><button onclick="startNumZap()">Nouvelle Partie</button></div>
+        <div id="numzap-grid" class="numzap-grid"></div>
+        <div class="game-actions"><button onclick="startNumZap()">Nouvelle Partie</button></div>
         <button class="back-btn" onclick="backToMenu()">Retour</button>
     </div>
 
@@ -927,11 +1346,11 @@
     <div class="game-container" id="simonrev">
         <h2>🔁 Simon Reverse</h2>
         <div id="simonrev-status">Appuie sur Commencer</div>
-        <div style="display:flex;gap:10px;justify-content:center;margin:15px;">
-            <div id="simonrev-0" style="width:70px;height:70px;border-radius:10px;background:#e74c3c;cursor:pointer"></div>
-            <div id="simonrev-1" style="width:70px;height:70px;border-radius:10px;background:#f1c40f;cursor:pointer"></div>
-            <div id="simonrev-2" style="width:70px;height:70px;border-radius:10px;background:#2ecc71;cursor:pointer"></div>
-            <div id="simonrev-3" style="width:70px;height:70px;border-radius:10px;background:#3498db;cursor:pointer"></div>
+        <div class="center-flex">
+            <div id="simonrev-0" class="simon-btn-sm" style="background:#e74c3c"></div>
+            <div id="simonrev-1" class="simon-btn-sm" style="background:#f1c40f"></div>
+            <div id="simonrev-2" class="simon-btn-sm" style="background:#2ecc71"></div>
+            <div id="simonrev-3" class="simon-btn-sm" style="background:#3498db"></div>
         </div>
         <button onclick="startSimonRev()">Commencer</button>
         <button class="back-btn" onclick="backToMenu()">Retour</button>
@@ -941,8 +1360,8 @@
     <div class="game-container" id="reflexsprint">
         <h2>⚡ Reflex Sprint</h2>
         <div id="reflexsprint-status">Fais 5 rounds</div>
-        <div id="reflexsprint-box" style="width:200px;height:80px;background:#ccc;border-radius:6px;display:flex;align-items:center;justify-content:center;margin:15px;">Prêt ?</div>
-        <div style="margin:10px;"><button onclick="startReflexSprint()">Commencer</button></div>
+        <div id="reflexsprint-box" class="reflex-box">Prêt ?</div>
+        <div class="game-actions"><button onclick="startReflexSprint()">Commencer</button></div>
         <button class="back-btn" onclick="backToMenu()">Retour</button>
     </div>
     </div> <!-- End Mini Games Section -->
@@ -981,6 +1400,26 @@
             <div class="game-card gambling-card" onclick="showGamblingGame('slots')">
                 <h2>🍒 Slots Deluxe</h2>
                 <p>Machine à sous améliorée !</p>
+            </div>
+            <div class="game-card gambling-card" onclick="showGamblingGame('casinomines')">
+                <h2>💣 Casino Mines</h2>
+                <p>Révèle les cases sans toucher de bombe !</p>
+            </div>
+            <div class="game-card gambling-card" onclick="showGamblingGame('fortune')">
+                <h2>🎡 Roue de Fortune</h2>
+                <p>Tourne la roue et gagne des multiplicateurs !</p>
+            </div>
+            <div class="game-card gambling-card" onclick="showGamblingGame('videopoker')">
+                <h2>🃏 Video Poker</h2>
+                <p>5 cartes, garde les meilleures !</p>
+            </div>
+            <div class="game-card gambling-card" onclick="showGamblingGame('tower')">
+                <h2>🐉 Dragon Tower</h2>
+                <p>Grimpe la tour sans réveiller le dragon !</p>
+            </div>
+            <div class="game-card gambling-card" onclick="showGamblingGame('limbo')">
+                <h2>🎱 Limbo</h2>
+                <p>Fixe un objectif et tente ta chance !</p>
             </div>
         </div>
 
@@ -1127,6 +1566,98 @@
             <button onclick="spinSlots()">🎰 Tirer le levier</button>
             <button class="back-btn" onclick="backToGamblingMenu()">Retour</button>
         </div>
+
+        <!-- Casino Mines -->
+        <div class="game-container" id="casinomines">
+            <h2>💣 Casino Mines</h2>
+            <div id="cmines-result" style="font-size:1.3em;margin:10px;">Révèle les cases et évite les bombes !</div>
+            <div class="multiplier-badge" id="cmines-multiplier">x1.00</div>
+            <div class="casino-mines-grid" id="cmines-grid"></div>
+            <div>
+                <input type="number" class="bet-input" id="cmines-bet" value="100" min="1">
+                <label style="margin-left:10px;">Bombes:
+                    <select id="cmines-bombs" style="padding:8px;border-radius:6px;font-size:1em;">
+                        <option value="3">3</option>
+                        <option value="5" selected>5</option>
+                        <option value="7">7</option>
+                        <option value="10">10</option>
+                    </select>
+                </label>
+            </div>
+            <div style="margin:10px;">
+                <button onclick="startCasinoMines()">💣 Nouvelle Partie</button>
+                <button onclick="cashoutMines()" id="cmines-cashout-btn" disabled>💰 Retirer</button>
+            </div>
+            <button class="back-btn" onclick="backToGamblingMenu()">Retour</button>
+        </div>
+
+        <!-- Roue de Fortune -->
+        <div class="game-container" id="fortune">
+            <h2>🎡 Roue de Fortune</h2>
+            <div class="fortune-wheel-container">
+                <div class="fortune-pointer"></div>
+                <canvas id="fortune-canvas" width="280" height="280" class="fortune-wheel"></canvas>
+            </div>
+            <div id="fortune-result" style="font-size:1.3em;margin:15px;">Tourne la roue !</div>
+            <div>
+                <input type="number" class="bet-input" id="fortune-bet" value="100" min="1">
+            </div>
+            <button onclick="spinFortune()">🎡 Tourner</button>
+            <button class="back-btn" onclick="backToGamblingMenu()">Retour</button>
+        </div>
+
+        <!-- Video Poker -->
+        <div class="game-container" id="videopoker">
+            <h2>🃏 Video Poker</h2>
+            <div id="vp-paytable" style="font-size:0.85em;margin:10px;line-height:1.8;color:#555;">
+                Paire de Valets+ x1 | Double Paire x2 | Brelan x3 | Suite x5 | Couleur x8 | Full x10 | Carré x25 | Quinte Flush x50
+            </div>
+            <div class="poker-hand" id="vp-hand"></div>
+            <div id="vp-result" style="font-size:1.3em;margin:15px;font-weight:bold;"></div>
+            <div>
+                <input type="number" class="bet-input" id="vp-bet" value="100" min="1">
+            </div>
+            <div id="vp-actions" style="margin:10px;">
+                <button onclick="startVideoPoker()">🎴 Distribuer</button>
+                <button onclick="vpDraw()" id="vp-draw-btn" disabled>🔄 Tirer</button>
+            </div>
+            <button class="back-btn" onclick="backToGamblingMenu()">Retour</button>
+        </div>
+
+        <!-- Dragon Tower -->
+        <div class="game-container" id="tower">
+            <h2>🐉 Dragon Tower</h2>
+            <div id="tower-result" style="font-size:1.2em;margin:10px;">Choisis une colonne à chaque étage !</div>
+            <div class="multiplier-badge" id="tower-multiplier">x1.00</div>
+            <div class="tower-grid" id="tower-grid"></div>
+            <div>
+                <input type="number" class="bet-input" id="tower-bet" value="100" min="1">
+            </div>
+            <div style="margin:10px;">
+                <button onclick="startTower()">🐉 Nouvelle Partie</button>
+                <button onclick="cashoutTower()" id="tower-cashout-btn" disabled>💰 Retirer</button>
+            </div>
+            <button class="back-btn" onclick="backToGamblingMenu()">Retour</button>
+        </div>
+
+        <!-- Limbo -->
+        <div class="game-container" id="limbo">
+            <h2>🎱 Limbo</h2>
+            <div class="limbo-display" id="limbo-display">?</div>
+            <div id="limbo-result" style="font-size:1.3em;margin:15px;">Fixe un objectif et lance !</div>
+            <div>
+                <label style="font-weight:bold;">Mise:</label>
+                <input type="number" class="bet-input" id="limbo-bet" value="100" min="1">
+            </div>
+            <div>
+                <label style="font-weight:bold;">Objectif:</label>
+                <input type="number" class="limbo-target-input" id="limbo-target" value="2" min="1.1" step="0.1">
+                <span style="color:#666;font-size:0.9em;">x (min 1.1)</span>
+            </div>
+            <button onclick="playLimbo()">🎱 Lancer</button>
+            <button class="back-btn" onclick="backToGamblingMenu()">Retour</button>
+        </div>
+
     </div> <!-- End Gambling Section -->
 
     <script>
@@ -2077,34 +2608,53 @@
             }
         }
 
-        // Whack-a-Mole
+        // WHACK-A-MOLE
         let moleInterval = null;
         let moleScore = 0;
         let moleRunning = false;
-        function startMole(){
+
+        function startMole() {
             const grid = document.getElementById('mole-grid');
             grid.innerHTML = '';
             moleScore = 0;
             document.getElementById('mole-status').textContent = 'Score: 0';
-            for(let i=0;i<9;i++){
+
+            for (let i = 0; i < 9; i++) {
                 const cell = document.createElement('div');
-                cell.style.width='120px'; cell.style.height='80px'; cell.style.background='#95a5a6'; cell.style.borderRadius='8px'; cell.style.display='flex'; cell.style.alignItems='center'; cell.style.justifyContent='center'; cell.style.cursor='pointer';
+                cell.className = 'game-grid-cell mole-cell';
                 cell.dataset.index = i;
-                cell.onclick = ()=>{ if(cell.dataset.has==='1'){ moleScore++; cell.dataset.has='0'; cell.textContent=''; document.getElementById('mole-status').textContent = 'Score: '+moleScore; } };
+                cell.onclick = () => {
+                    if (cell.dataset.has === '1') {
+                        moleScore++;
+                        cell.dataset.has = '0';
+                        cell.textContent = '';
+                        document.getElementById('mole-status').textContent = 'Score: ' + moleScore;
+                    }
+                };
                 grid.appendChild(cell);
             }
+
             moleRunning = true;
-            moleInterval = setInterval(()=>{
-                const cells = Array.from(document.getElementById('mole-grid').children);
-                cells.forEach(c=>{ c.dataset.has='0'; c.textContent=''; });
-                const idx = Math.floor(Math.random()*cells.length);
+            moleInterval = setInterval(() => {
+                const cells = Array.from(grid.children);
+                cells.forEach(c => { c.dataset.has = '0'; c.textContent = ''; });
+                const idx = Math.floor(Math.random() * cells.length);
                 const target = cells[idx];
-                target.dataset.has='1';
-                target.textContent='🦫';
-                setTimeout(()=>{ if(target.dataset.has==='1'){ target.dataset.has='0'; target.textContent=''; } },700);
-            },700);
-            // arrêter après 20s
-            setTimeout(()=>{ clearInterval(moleInterval); moleRunning=false; alert('Fin du jeu ! Score: '+moleScore); },20000);
+                target.dataset.has = '1';
+                target.textContent = '🦫';
+                setTimeout(() => {
+                    if (target.dataset.has === '1') {
+                        target.dataset.has = '0';
+                        target.textContent = '';
+                    }
+                }, 700);
+            }, 700);
+
+            setTimeout(() => {
+                clearInterval(moleInterval);
+                moleRunning = false;
+                alert('Fin du jeu ! Score: ' + moleScore);
+            }, 20000);
         }
 
         // HANGMAN
@@ -2526,85 +3076,126 @@
 
         // PUZZLE 15
         let puzzle15State = [];
-        function startPuzzle15(){
-            // create solved state
-            puzzle15State = Array.from({length:16},(_,i)=>i<15?i+1:0);
-            // shuffle by making legal random moves from solved state
-            for(let k=0;k<300;k++){
+
+        function startPuzzle15() {
+            puzzle15State = Array.from({ length: 16 }, (_, i) => i < 15 ? i + 1 : 0);
+
+            // Shuffle by making legal random moves
+            for (let k = 0; k < 300; k++) {
                 const empty = puzzle15State.indexOf(0);
-                const r = Math.floor(empty/4), c = empty%4;
+                const r = Math.floor(empty / 4), c = empty % 4;
                 const moves = [];
-                if(r>0) moves.push((r-1)*4+c);
-                if(r<3) moves.push((r+1)*4+c);
-                if(c>0) moves.push(r*4+(c-1));
-                if(c<3) moves.push(r*4+(c+1));
-                const m = moves[Math.floor(Math.random()*moves.length)];
-                puzzle15State[empty]=puzzle15State[m]; puzzle15State[m]=0;
+                if (r > 0) moves.push((r - 1) * 4 + c);
+                if (r < 3) moves.push((r + 1) * 4 + c);
+                if (c > 0) moves.push(r * 4 + (c - 1));
+                if (c < 3) moves.push(r * 4 + (c + 1));
+                const m = moves[Math.floor(Math.random() * moves.length)];
+                puzzle15State[empty] = puzzle15State[m];
+                puzzle15State[m] = 0;
             }
-            document.getElementById('puzzle15-status').textContent='Remets les tuiles dans l\'ordre.';
+
+            document.getElementById('puzzle15-status').textContent = 'Remets les tuiles dans l\'ordre.';
             renderPuzzle15();
         }
-        function renderPuzzle15(){
+
+        function renderPuzzle15() {
             const grid = document.getElementById('puzzle15-grid');
-            grid.innerHTML='';
-            puzzle15State.forEach((v,i)=>{
+            grid.innerHTML = '';
+            puzzle15State.forEach((v, i) => {
                 const el = document.createElement('div');
-                el.style.width='80px'; el.style.height='80px'; el.style.display='flex'; el.style.alignItems='center'; el.style.justifyContent='center'; el.style.background=v? '#fff':'transparent'; el.style.border='1px solid #333'; el.style.fontSize='1.2em'; el.style.cursor=v?'pointer':'default';
-                el.textContent = v? v : '';
-                el.onclick = ()=>{
-                    if(!v) return;
+                el.className = 'tile-cell';
+                el.style.background = v ? '#fff' : 'transparent';
+                el.style.cursor = v ? 'pointer' : 'default';
+                el.textContent = v ? v : '';
+                el.onclick = () => {
+                    if (!v) return;
                     const empty = puzzle15State.indexOf(0);
-                    const r1 = Math.floor(i/4), c1 = i%4;
-                    const r2 = Math.floor(empty/4), c2 = empty%4;
-                    const manh = Math.abs(r1-r2)+Math.abs(c1-c2);
-                    if(manh===1){ puzzle15State[empty]=puzzle15State[i]; puzzle15State[i]=0; renderPuzzle15(); checkPuzzle15Win(); }
+                    const r1 = Math.floor(i / 4), c1 = i % 4;
+                    const r2 = Math.floor(empty / 4), c2 = empty % 4;
+                    const manh = Math.abs(r1 - r2) + Math.abs(c1 - c2);
+                    if (manh === 1) {
+                        puzzle15State[empty] = puzzle15State[i];
+                        puzzle15State[i] = 0;
+                        renderPuzzle15();
+                        checkPuzzle15Win();
+                    }
                 };
                 grid.appendChild(el);
             });
         }
-        function checkPuzzle15Win(){
-            for(let i=0;i<15;i++) if(puzzle15State[i]!==i+1) return;
-            document.getElementById('puzzle15-status').textContent='🎉 Tu as gagné !';
+
+        function checkPuzzle15Win() {
+            for (let i = 0; i < 15; i++) {
+                if (puzzle15State[i] !== i + 1) return;
+            }
+            document.getElementById('puzzle15-status').textContent = '🎉 Tu as gagné !';
         }
 
         // LIGHTS OUT (5x5)
         let lightsOutState = [];
-        function startLightsOut(){
-            lightsOutState = Array.from({length:25},()=>Math.random()<0.5?1:0);
-            document.getElementById('lightsout-status').textContent='Éteins toutes les lumières.';
+
+        function startLightsOut() {
+            lightsOutState = Array.from({ length: 25 }, () => Math.random() < 0.5 ? 1 : 0);
+            document.getElementById('lightsout-status').textContent = 'Éteins toutes les lumières.';
             renderLightsOut();
         }
-        function renderLightsOut(){
-            const grid = document.getElementById('lightsout-grid'); grid.innerHTML='';
-            lightsOutState.forEach((on,i)=>{
+
+        function renderLightsOut() {
+            const grid = document.getElementById('lightsout-grid');
+            grid.innerHTML = '';
+            lightsOutState.forEach((on, i) => {
                 const btn = document.createElement('div');
-                btn.style.width='60px'; btn.style.height='60px'; btn.style.display='flex'; btn.style.alignItems='center'; btn.style.justifyContent='center'; btn.style.cursor='pointer'; btn.style.borderRadius='6px'; btn.style.background = on? '#ffd54f' : '#444';
-                btn.onclick = ()=>{ toggleLight(i); };
+                btn.className = 'light-cell ' + (on ? 'on' : 'off');
+                btn.onclick = () => toggleLight(i);
                 grid.appendChild(btn);
             });
         }
-        function toggleLight(i){
-            const r = Math.floor(i/5), c = i%5;
-            const idxs = [i, (r>0?i-5:null), (r<4?i+5:null), (c>0?i-1:null), (c<4?i+1:null)].filter(x=>x!==null);
-            idxs.forEach(ix=> lightsOutState[ix] = lightsOutState[ix]?0:1);
+
+        function toggleLight(i) {
+            const r = Math.floor(i / 5), c = i % 5;
+            const idxs = [
+                i,
+                r > 0 ? i - 5 : null,
+                r < 4 ? i + 5 : null,
+                c > 0 ? i - 1 : null,
+                c < 4 ? i + 1 : null
+            ].filter(x => x !== null);
+
+            idxs.forEach(ix => lightsOutState[ix] = lightsOutState[ix] ? 0 : 1);
             renderLightsOut();
-            if(lightsOutState.every(v=>v===0)) document.getElementById('lightsout-status').textContent='🎉 Gagné !';
+
+            if (lightsOutState.every(v => v === 0)) {
+                document.getElementById('lightsout-status').textContent = '🎉 Gagné !';
+            }
         }
 
         // BUBBLE POP
         let bubbleScore = 0;
         let bubbleTimer = null;
-        function startBubblePop(){
-            const grid = document.getElementById('bubble-grid'); grid.innerHTML=''; bubbleScore = 0; document.getElementById('bubble-status').textContent='Score: 0';
-            for(let i=0;i<30;i++){
+
+        function startBubblePop() {
+            const grid = document.getElementById('bubble-grid');
+            grid.innerHTML = '';
+            bubbleScore = 0;
+            document.getElementById('bubble-status').textContent = 'Score: 0';
+
+            for (let i = 0; i < 30; i++) {
                 const b = document.createElement('div');
-                b.style.width='60px'; b.style.height='60px'; b.style.borderRadius='50%'; b.style.background='#7f8c8d'; b.style.display='flex'; b.style.alignItems='center'; b.style.justifyContent='center'; b.style.cursor='pointer'; b.textContent='';
-                b.onclick = ()=>{ if(b.dataset.popped==='1') return; b.dataset.popped='1'; b.style.visibility='hidden'; bubbleScore++; document.getElementById('bubble-status').textContent='Score: '+bubbleScore; };
+                b.className = 'bubble-cell';
+                b.onclick = () => {
+                    if (b.dataset.popped === '1') return;
+                    b.dataset.popped = '1';
+                    b.style.visibility = 'hidden';
+                    bubbleScore++;
+                    document.getElementById('bubble-status').textContent = 'Score: ' + bubbleScore;
+                };
                 grid.appendChild(b);
             }
-            // timer 20s
+
             clearTimeout(bubbleTimer);
-            bubbleTimer = setTimeout(()=>{ alert('Fin! Score: '+bubbleScore); },20000);
+            bubbleTimer = setTimeout(() => {
+                alert('Fin! Score: ' + bubbleScore);
+            }, 20000);
         }
 
         // --- ADDITIONAL GAMES JS ---
@@ -2667,45 +3258,197 @@
         document.addEventListener('keydown', (e)=>{ if(!game2048Running) return; if(e.key==='ArrowLeft') move2048('L'); if(e.key==='ArrowRight') move2048('R'); if(e.key==='ArrowUp') move2048('U'); if(e.key==='ArrowDown') move2048('D'); });
 
         // MINESWEEPER (5x5)
-        let minesGrid=[], minesRevealed=[]; let minesCount=5;
-        function startMines(){
-            minesGrid = Array(25).fill(0); minesRevealed = Array(25).fill(false); minesRunning=true;
-            // place bombs
-            let placed=0; while(placed<minesCount){ const i=Math.floor(Math.random()*25); if(minesGrid[i]===-1) continue; minesGrid[i]=-1; placed++; }
-            // numbers
-            for(let i=0;i<25;i++) if(minesGrid[i]!==-1){ let n=0; const r=Math.floor(i/5), c=i%5; for(let dr=-1;dr<=1;dr++) for(let dc=-1;dc<=1;dc++){ const rr=r+dr, cc=c+dc; if(rr>=0&&rr<5&&cc>=0&&cc<5){ if(minesGrid[rr*5+cc]===-1) n++; } } minesGrid[i]=n; }
-            document.getElementById('mines-status').textContent='Bonne chance.'; renderMines();
-        }
-        function renderMines(){ const grid=document.getElementById('mines-grid'); grid.innerHTML=''; minesGrid.forEach((v,i)=>{ const b=document.createElement('div'); b.style.width='50px'; b.style.height='50px'; b.style.display='flex'; b.style.alignItems='center'; b.style.justifyContent='center'; b.style.background= minesRevealed[i] ? '#eee':'#777'; b.style.cursor='pointer'; b.style.border='1px solid #333'; if(minesRevealed[i]) b.textContent = v===-1? '💣': (v? v : ''); b.onclick = ()=> revealM(i); grid.appendChild(b); }); }
-        function revealM(i){ if(minesRevealed[i]||!minesRunning) return; minesRevealed[i]=true; if(minesGrid[i]===-1){ // lost
-                minesRunning=false; document.getElementById('mines-status').textContent='💥 Perdu !'; revealAllM(); return; }
-            if(minesGrid[i]===0){ // flood
-                const r=Math.floor(i/5), c=i%5; for(let dr=-1;dr<=1;dr++) for(let dc=-1;dc<=1;dc++){ const rr=r+dr, cc=c+dc; if(rr>=0&&rr<5&&cc>=0&&cc<5){ const idx=rr*5+cc; if(!minesRevealed[idx]) revealM(idx); } }
+        let minesGrid = [];
+        let minesRevealed = [];
+        let minesCount = 5;
+
+        function startMines() {
+            minesGrid = Array(25).fill(0);
+            minesRevealed = Array(25).fill(false);
+            minesRunning = true;
+
+            // Place bombs
+            let placed = 0;
+            while (placed < minesCount) {
+                const i = Math.floor(Math.random() * 25);
+                if (minesGrid[i] === -1) continue;
+                minesGrid[i] = -1;
+                placed++;
             }
-            renderMines(); checkMinesWin(); }
-        function revealAllM(){ minesRevealed = minesGrid.map(()=>true); renderMines(); }
-        function checkMinesWin(){ if(minesRevealed.filter(x=>x).length === 25 - minesCount){ minesRunning=false; document.getElementById('mines-status').textContent='🎉 Gagné !'; } }
+
+            // Calculate numbers
+            for (let i = 0; i < 25; i++) {
+                if (minesGrid[i] === -1) continue;
+                let n = 0;
+                const r = Math.floor(i / 5), c = i % 5;
+                for (let dr = -1; dr <= 1; dr++) {
+                    for (let dc = -1; dc <= 1; dc++) {
+                        const rr = r + dr, cc = c + dc;
+                        if (rr >= 0 && rr < 5 && cc >= 0 && cc < 5) {
+                            if (minesGrid[rr * 5 + cc] === -1) n++;
+                        }
+                    }
+                }
+                minesGrid[i] = n;
+            }
+
+            document.getElementById('mines-status').textContent = 'Bonne chance.';
+            renderMines();
+        }
+
+        function renderMines() {
+            const grid = document.getElementById('mines-grid');
+            grid.innerHTML = '';
+            minesGrid.forEach((v, i) => {
+                const b = document.createElement('div');
+                b.className = 'mine-cell ' + (minesRevealed[i] ? 'shown' : 'hidden');
+                if (minesRevealed[i]) {
+                    b.textContent = v === -1 ? '💣' : (v ? v : '');
+                }
+                b.onclick = () => revealM(i);
+                grid.appendChild(b);
+            });
+        }
+
+        function revealM(i) {
+            if (minesRevealed[i] || !minesRunning) return;
+            minesRevealed[i] = true;
+
+            if (minesGrid[i] === -1) {
+                minesRunning = false;
+                document.getElementById('mines-status').textContent = '💥 Perdu !';
+                revealAllM();
+                return;
+            }
+
+            if (minesGrid[i] === 0) {
+                const r = Math.floor(i / 5), c = i % 5;
+                for (let dr = -1; dr <= 1; dr++) {
+                    for (let dc = -1; dc <= 1; dc++) {
+                        const rr = r + dr, cc = c + dc;
+                        if (rr >= 0 && rr < 5 && cc >= 0 && cc < 5) {
+                            const idx = rr * 5 + cc;
+                            if (!minesRevealed[idx]) revealM(idx);
+                        }
+                    }
+                }
+            }
+
+            renderMines();
+            checkMinesWin();
+        }
+
+        function revealAllM() {
+            minesRevealed = minesGrid.map(() => true);
+            renderMines();
+        }
+
+        function checkMinesWin() {
+            if (minesRevealed.filter(x => x).length === 25 - minesCount) {
+                minesRunning = false;
+                document.getElementById('mines-status').textContent = '🎉 Gagné !';
+            }
+        }
 
         // PONG (simple single-player)
-        let pongAni=null; let pongScore=0;
-        function startPong(){ pongRunning=true; pongScore=0; const canvas=document.getElementById('pong-canvas'); const ctx=canvas.getContext('2d'); let paddleX=canvas.width/2-40; let ball={x:canvas.width/2,y:canvas.height/2,vx:3,vy:-3}; canvas.onmousemove = (e)=>{ const r=canvas.getBoundingClientRect(); paddleX = e.clientX - r.left - 40; if(paddleX<0) paddleX=0; if(paddleX>canvas.width-80) paddleX=canvas.width-80; };
-            function loop(){ ctx.clearRect(0,0,canvas.width,canvas.height); // paddle
-                ctx.fillStyle='#fff'; ctx.fillRect(paddleX, canvas.height-20, 80, 10); // ball
-                ctx.beginPath(); ctx.arc(ball.x, ball.y, 8,0,Math.PI*2); ctx.fill(); ball.x+=ball.vx; ball.y+=ball.vy;
-                if(ball.x<8||ball.x>canvas.width-8) ball.vx*=-1; if(ball.y<8) ball.vy*=-1;
-                if(ball.y+8 >= canvas.height-20 && ball.x>paddleX && ball.x<paddleX+80){ ball.vy*=-1; pongScore++; document.getElementById('pong-status').textContent = 'Score: '+pongScore; }
-                if(ball.y>canvas.height){ cancelAnimationFrame(pongAni); pongRunning=false; alert('Game over! Score: '+pongScore); return; }
+        let pongAni = null;
+        let pongScore = 0;
+
+        function startPong() {
+            pongRunning = true;
+            pongScore = 0;
+            const canvas = document.getElementById('pong-canvas');
+            const ctx = canvas.getContext('2d');
+            let paddleX = canvas.width / 2 - 40;
+            let ball = { x: canvas.width / 2, y: canvas.height / 2, vx: 3, vy: -3 };
+
+            canvas.onmousemove = (e) => {
+                const r = canvas.getBoundingClientRect();
+                paddleX = e.clientX - r.left - 40;
+                if (paddleX < 0) paddleX = 0;
+                if (paddleX > canvas.width - 80) paddleX = canvas.width - 80;
+            };
+
+            function loop() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+                // Paddle
+                ctx.fillStyle = '#fff';
+                ctx.fillRect(paddleX, canvas.height - 20, 80, 10);
+
+                // Ball
+                ctx.beginPath();
+                ctx.arc(ball.x, ball.y, 8, 0, Math.PI * 2);
+                ctx.fill();
+
+                ball.x += ball.vx;
+                ball.y += ball.vy;
+
+                if (ball.x < 8 || ball.x > canvas.width - 8) ball.vx *= -1;
+                if (ball.y < 8) ball.vy *= -1;
+
+                if (ball.y + 8 >= canvas.height - 20 && ball.x > paddleX && ball.x < paddleX + 80) {
+                    ball.vy *= -1;
+                    pongScore++;
+                    document.getElementById('pong-status').textContent = 'Score: ' + pongScore;
+                }
+
+                if (ball.y > canvas.height) {
+                    cancelAnimationFrame(pongAni);
+                    pongRunning = false;
+                    alert('Game over! Score: ' + pongScore);
+                    return;
+                }
+
                 pongAni = requestAnimationFrame(loop);
             }
-            loop(); }
+            loop();
+        }
 
         // COLOR MATCH
-        const cmColors = ['red','green','blue','yellow','purple'];
-        let cmScore=0;
-        function startColorMatch(){ colormatchRunning=true; cmScore=0; renderColorButtons(); nextColorRound(); }
-        function renderColorButtons(){ const wrap=document.getElementById('colormatch-buttons'); wrap.innerHTML=''; cmColors.forEach(c=>{ const b=document.createElement('button'); b.textContent=c; b.style.background=c; b.style.color='#000'; b.style.padding='8px 12px'; b.onclick=()=>{ if(!colormatchRunning) return; if(c===currentColorAnswer){ cmScore++; document.getElementById('colormatch-status').textContent='Score: '+cmScore; nextColorRound(); } else { colormatchRunning=false; alert('Perdu! Score: '+cmScore); } }; wrap.appendChild(b); }); }
-        let currentColorAnswer='';
-        function nextColorRound(){ const word = cmColors[Math.floor(Math.random()*cmColors.length)]; const displayColor = cmColors[Math.floor(Math.random()*cmColors.length)]; currentColorAnswer = word; const q = document.getElementById('colormatch-question'); q.textContent = word.toUpperCase(); q.style.color = displayColor; }
+        const cmColors = ['red', 'green', 'blue', 'yellow', 'purple'];
+        let cmScore = 0;
+        let currentColorAnswer = '';
+
+        function startColorMatch() {
+            colormatchRunning = true;
+            cmScore = 0;
+            renderColorButtons();
+            nextColorRound();
+        }
+
+        function renderColorButtons() {
+            const wrap = document.getElementById('colormatch-buttons');
+            wrap.innerHTML = '';
+            cmColors.forEach(c => {
+                const b = document.createElement('button');
+                b.textContent = c;
+                b.style.background = c;
+                b.style.color = '#000';
+                b.style.padding = '8px 12px';
+                b.onclick = () => {
+                    if (!colormatchRunning) return;
+                    if (c === currentColorAnswer) {
+                        cmScore++;
+                        document.getElementById('colormatch-status').textContent = 'Score: ' + cmScore;
+                        nextColorRound();
+                    } else {
+                        colormatchRunning = false;
+                        alert('Perdu! Score: ' + cmScore);
+                    }
+                };
+                wrap.appendChild(b);
+            });
+        }
+
+        function nextColorRound() {
+            const word = cmColors[Math.floor(Math.random() * cmColors.length)];
+            const displayColor = cmColors[Math.floor(Math.random() * cmColors.length)];
+            currentColorAnswer = word;
+            const q = document.getElementById('colormatch-question');
+            q.textContent = word.toUpperCase();
+            q.style.color = displayColor;
+        }
 
         // TARGET PRACTICE, NUMBER ZAP, SIMON REVERSE, REFLEX SPRINT
 
@@ -2713,27 +3456,83 @@
         let targetScore = 0;
         let targetInterval = null;
         let targetRunning = false;
-        function startTarget(){
-            const grid = document.getElementById('target-grid'); grid.innerHTML=''; targetScore=0; document.getElementById('target-status').textContent='Score: 0';
-            for(let i=0;i<9;i++){ const cell=document.createElement('div'); cell.style.width='120px'; cell.style.height='80px'; cell.style.background='#95a5a6'; cell.style.borderRadius='8px'; cell.style.display='flex'; cell.style.alignItems='center'; cell.style.justifyContent='center'; cell.style.cursor='pointer'; cell.dataset.has='0'; cell.onclick=()=>{ if(cell.dataset.has==='1'){ targetScore++; cell.dataset.has='0'; cell.textContent=''; document.getElementById('target-status').textContent='Score: '+targetScore; } }; grid.appendChild(cell); }
-            targetRunning=true;
-            targetInterval = setInterval(()=>{
-                const cells = Array.from(document.getElementById('target-grid').children);
-                cells.forEach(c=>{ c.dataset.has='0'; c.textContent=''; });
-                const idx = Math.floor(Math.random()*cells.length);
-                const t = cells[idx]; t.dataset.has='1'; t.textContent='🎯';
-                setTimeout(()=>{ if(t.dataset.has==='1'){ t.dataset.has='0'; t.textContent=''; } },700);
-            },700);
-            setTimeout(()=>{ clearInterval(targetInterval); targetRunning=false; alert('Fin! Score: '+targetScore); },20000);
+
+        function startTarget() {
+            const grid = document.getElementById('target-grid');
+            grid.innerHTML = '';
+            targetScore = 0;
+            document.getElementById('target-status').textContent = 'Score: 0';
+
+            for (let i = 0; i < 9; i++) {
+                const cell = document.createElement('div');
+                cell.className = 'game-grid-cell mole-cell';
+                cell.dataset.has = '0';
+                cell.onclick = () => {
+                    if (cell.dataset.has === '1') {
+                        targetScore++;
+                        cell.dataset.has = '0';
+                        cell.textContent = '';
+                        document.getElementById('target-status').textContent = 'Score: ' + targetScore;
+                    }
+                };
+                grid.appendChild(cell);
+            }
+
+            targetRunning = true;
+            targetInterval = setInterval(() => {
+                const cells = Array.from(grid.children);
+                cells.forEach(c => { c.dataset.has = '0'; c.textContent = ''; });
+                const idx = Math.floor(Math.random() * cells.length);
+                const t = cells[idx];
+                t.dataset.has = '1';
+                t.textContent = '🎯';
+                setTimeout(() => {
+                    if (t.dataset.has === '1') {
+                        t.dataset.has = '0';
+                        t.textContent = '';
+                    }
+                }, 700);
+            }, 700);
+
+            setTimeout(() => {
+                clearInterval(targetInterval);
+                targetRunning = false;
+                alert('Fin! Score: ' + targetScore);
+            }, 20000);
         }
 
         // NUMBER ZAP (click numbers 1..16 in order)
         let numzapExpected = 1;
         let numzapRunning = false;
-        function startNumZap(){
-            const grid=document.getElementById('numzap-grid'); grid.innerHTML=''; const nums = Array.from({length:16},(_,i)=>i+1).sort(()=>Math.random()-0.5);
-            numzapExpected=1; numzapRunning=true; document.getElementById('numzap-status').textContent='Clique 1 → 16';
-            nums.forEach(n=>{ const b=document.createElement('div'); b.style.width='80px'; b.style.height='80px'; b.style.display='flex'; b.style.alignItems='center'; b.style.justifyContent='center'; b.style.background='#fff'; b.style.border='1px solid #333'; b.style.cursor='pointer'; b.textContent=n; b.onclick=()=>{ if(!numzapRunning) return; if(n===numzapExpected){ b.style.visibility='hidden'; numzapExpected++; if(numzapExpected>16){ numzapRunning=false; alert('🎉 Gagné !'); } } else { numzapRunning=false; alert('Mauvais! Tu as cliqué '+n); } }; grid.appendChild(b); });
+
+        function startNumZap() {
+            const grid = document.getElementById('numzap-grid');
+            grid.innerHTML = '';
+            const nums = Array.from({ length: 16 }, (_, i) => i + 1).sort(() => Math.random() - 0.5);
+            numzapExpected = 1;
+            numzapRunning = true;
+            document.getElementById('numzap-status').textContent = 'Clique 1 → 16';
+
+            nums.forEach(n => {
+                const b = document.createElement('div');
+                b.className = 'tile-cell';
+                b.textContent = n;
+                b.onclick = () => {
+                    if (!numzapRunning) return;
+                    if (n === numzapExpected) {
+                        b.style.visibility = 'hidden';
+                        numzapExpected++;
+                        if (numzapExpected > 16) {
+                            numzapRunning = false;
+                            alert('🎉 Gagné !');
+                        }
+                    } else {
+                        numzapRunning = false;
+                        alert('Mauvais! Tu as cliqué ' + n);
+                    }
+                };
+                grid.appendChild(b);
+            });
         }
 
         // SIMON REVERSE
@@ -3177,30 +3976,30 @@
 
         function spinSlots() {
             const bet = parseInt(document.getElementById('slots-bet').value) || 0;
-            if(bet <= 0 || bet > playerPoints) { alert('Mise invalide !'); return; }
+            if (bet <= 0 || bet > playerPoints) { alert('Mise invalide !'); return; }
 
             const reelsEl = document.getElementById('slots-reels');
             let spins = 0;
-            
+
             const spinInterval = setInterval(() => {
                 const r1 = slotsDeluxeSymbols[Math.floor(Math.random() * slotsDeluxeSymbols.length)];
                 const r2 = slotsDeluxeSymbols[Math.floor(Math.random() * slotsDeluxeSymbols.length)];
                 const r3 = slotsDeluxeSymbols[Math.floor(Math.random() * slotsDeluxeSymbols.length)];
-                reelsEl.textContent = r1 + ' ' + r2 + ' ' + r3;
+                reelsEl.textContent = `${r1} ${r2} ${r3}`;
                 spins++;
-                
-                if(spins > 20) {
+
+                if (spins > 20) {
                     clearInterval(spinInterval);
                     const final1 = slotsDeluxeSymbols[Math.floor(Math.random() * slotsDeluxeSymbols.length)];
                     const final2 = slotsDeluxeSymbols[Math.floor(Math.random() * slotsDeluxeSymbols.length)];
                     const final3 = slotsDeluxeSymbols[Math.floor(Math.random() * slotsDeluxeSymbols.length)];
-                    reelsEl.textContent = final1 + ' ' + final2 + ' ' + final3;
+                    reelsEl.textContent = `${final1} ${final2} ${final3}`;
 
                     let winnings = 0;
-                    if(final1 === final2 && final2 === final3) {
+                    if (final1 === final2 && final2 === final3) {
                         winnings = bet * slotPayouts[final1];
                         document.getElementById('slots-result').innerHTML = `🎉 JACKPOT ! <span style="color:lime">+${winnings} pts!</span>`;
-                    } else if(final1 === final2 || final2 === final3 || final1 === final3) {
+                    } else if (final1 === final2 || final2 === final3 || final1 === final3) {
                         winnings = Math.floor(bet * 1.5);
                         document.getElementById('slots-result').innerHTML = `Paire ! <span style="color:lime">+${winnings} pts!</span>`;
                     } else {
@@ -3211,6 +4010,494 @@
                     updatePointsDisplay();
                 }
             }, 80);
+        }
+
+        // ==============================
+        // === CASINO MINES ===
+        // ==============================
+        let cminesGrid = [];
+        let cminesRevealed = [];
+        let cminesBombs = [];
+        let cminesRunning = false;
+        let cminesBet = 0;
+        let cminesMultiplier = 1;
+        let cminesSafeCount = 0;
+
+        function startCasinoMines() {
+            cminesBet = parseInt(document.getElementById('cmines-bet').value) || 0;
+            const bombCount = parseInt(document.getElementById('cmines-bombs').value) || 5;
+            if (cminesBet <= 0 || cminesBet > playerPoints) { alert('Mise invalide !'); return; }
+
+            cminesRunning = true;
+            cminesMultiplier = 1;
+            cminesSafeCount = 0;
+            cminesRevealed = Array(25).fill(false);
+            cminesBombs = [];
+
+            // Place bombs randomly
+            while (cminesBombs.length < bombCount) {
+                const idx = Math.floor(Math.random() * 25);
+                if (!cminesBombs.includes(idx)) cminesBombs.push(idx);
+            }
+
+            document.getElementById('cmines-multiplier').textContent = 'x1.00';
+            document.getElementById('cmines-result').textContent = 'Clique sur les cases pour révéler !';
+            document.getElementById('cmines-cashout-btn').disabled = false;
+            renderCasinoMines();
+        }
+
+        function renderCasinoMines() {
+            const grid = document.getElementById('cmines-grid');
+            grid.innerHTML = '';
+            for (let i = 0; i < 25; i++) {
+                const cell = document.createElement('div');
+                cell.className = 'casino-mine-cell';
+                if (cminesRevealed[i]) {
+                    cell.classList.add('revealed');
+                    if (cminesBombs.includes(i)) {
+                        cell.classList.add('bomb');
+                        cell.textContent = '💣';
+                    } else {
+                        cell.classList.add('safe');
+                        cell.textContent = '💎';
+                    }
+                } else {
+                    cell.textContent = '?';
+                    cell.onclick = () => revealCasinoMine(i);
+                }
+                grid.appendChild(cell);
+            }
+        }
+
+        function revealCasinoMine(index) {
+            if (!cminesRunning || cminesRevealed[index]) return;
+            cminesRevealed[index] = true;
+
+            if (cminesBombs.includes(index)) {
+                // BOOM - reveal all
+                cminesRunning = false;
+                cminesRevealed = Array(25).fill(true);
+                renderCasinoMines();
+                playerPoints -= cminesBet;
+                updatePointsDisplay();
+                document.getElementById('cmines-result').innerHTML = `<span style="color:red">💥 BOOM ! Perdu -${cminesBet}</span>`;
+                document.getElementById('cmines-cashout-btn').disabled = true;
+            } else {
+                cminesSafeCount++;
+                const bombCount = cminesBombs.length;
+                const safeTiles = 25 - bombCount;
+                // Multiplier increases based on how many safe tiles revealed
+                cminesMultiplier = parseFloat((1 + (cminesSafeCount * bombCount * 0.15)).toFixed(2));
+                document.getElementById('cmines-multiplier').textContent = `x${cminesMultiplier.toFixed(2)}`;
+                renderCasinoMines();
+
+                // Check if all safe tiles revealed
+                if (cminesSafeCount >= safeTiles) {
+                    cashoutMines();
+                }
+            }
+        }
+
+        function cashoutMines() {
+            if (!cminesRunning) return;
+            cminesRunning = false;
+            const winnings = Math.floor(cminesBet * cminesMultiplier);
+            playerPoints += winnings - cminesBet;
+            updatePointsDisplay();
+            document.getElementById('cmines-result').innerHTML = `<span style="color:lime">💰 Retiré ! +${winnings} pts (x${cminesMultiplier.toFixed(2)})</span>`;
+            document.getElementById('cmines-cashout-btn').disabled = true;
+            // Reveal all
+            cminesRevealed = Array(25).fill(true);
+            renderCasinoMines();
+        }
+
+        // ==============================
+        // === ROUE DE FORTUNE ===
+        // ==============================
+        const fortuneSegments = [
+            { label: 'x0', multiplier: 0, color: '#e74c3c' },
+            { label: 'x1.5', multiplier: 1.5, color: '#3498db' },
+            { label: 'x2', multiplier: 2, color: '#2ecc71' },
+            { label: 'x0.5', multiplier: 0.5, color: '#e67e22' },
+            { label: 'x3', multiplier: 3, color: '#9b59b6' },
+            { label: 'x1', multiplier: 1, color: '#1abc9c' },
+            { label: 'x5', multiplier: 5, color: '#f1c40f' },
+            { label: 'x0', multiplier: 0, color: '#e74c3c' },
+            { label: 'x2', multiplier: 2, color: '#2ecc71' },
+            { label: 'x1.5', multiplier: 1.5, color: '#3498db' },
+            { label: 'x10', multiplier: 10, color: '#ffd700' },
+            { label: 'x0.5', multiplier: 0.5, color: '#e67e22' },
+        ];
+        let fortuneSpinning = false;
+
+        function drawFortuneWheel(rotation = 0) {
+            const canvas = document.getElementById('fortune-canvas');
+            if (!canvas) return;
+            const ctx = canvas.getContext('2d');
+            const cx = canvas.width / 2;
+            const cy = canvas.height / 2;
+            const r = cx - 6;
+            const segAngle = (2 * Math.PI) / fortuneSegments.length;
+
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.save();
+            ctx.translate(cx, cy);
+            ctx.rotate(rotation * Math.PI / 180);
+
+            fortuneSegments.forEach((seg, i) => {
+                const startAngle = i * segAngle;
+                const endAngle = startAngle + segAngle;
+
+                ctx.beginPath();
+                ctx.moveTo(0, 0);
+                ctx.arc(0, 0, r, startAngle, endAngle);
+                ctx.closePath();
+                ctx.fillStyle = seg.color;
+                ctx.fill();
+                ctx.strokeStyle = '#fff';
+                ctx.lineWidth = 2;
+                ctx.stroke();
+
+                // Label
+                ctx.save();
+                ctx.rotate(startAngle + segAngle / 2);
+                ctx.textAlign = 'center';
+                ctx.fillStyle = '#fff';
+                ctx.font = 'bold 14px Comic Sans MS, cursive';
+                ctx.shadowColor = 'rgba(0,0,0,0.5)';
+                ctx.shadowBlur = 3;
+                ctx.fillText(seg.label, r * 0.65, 5);
+                ctx.shadowBlur = 0;
+                ctx.restore();
+            });
+
+            ctx.restore();
+        }
+
+        // Draw initial wheel
+        setTimeout(() => drawFortuneWheel(0), 100);
+
+        function spinFortune() {
+            if (fortuneSpinning) return;
+            const bet = parseInt(document.getElementById('fortune-bet').value) || 0;
+            if (bet <= 0 || bet > playerPoints) { alert('Mise invalide !'); return; }
+
+            fortuneSpinning = true;
+            document.getElementById('fortune-result').textContent = '🎡 La roue tourne...';
+
+            const winIndex = Math.floor(Math.random() * fortuneSegments.length);
+            const segAngle = 360 / fortuneSegments.length;
+            // Spin: 5+ full rotations + land on segment
+            // The pointer is at top (270 deg in canvas coords), we need to offset
+            const targetAngle = 360 * (5 + Math.random() * 3) + (360 - winIndex * segAngle - segAngle / 2);
+
+            let currentAngle = 0;
+            const duration = 4000;
+            const startTime = Date.now();
+
+            function animateSpin() {
+                const elapsed = Date.now() - startTime;
+                const progress = Math.min(elapsed / duration, 1);
+                // Easing out cubic
+                const eased = 1 - Math.pow(1 - progress, 3);
+                currentAngle = targetAngle * eased;
+                drawFortuneWheel(currentAngle);
+
+                if (progress < 1) {
+                    requestAnimationFrame(animateSpin);
+                } else {
+                    fortuneSpinning = false;
+                    const seg = fortuneSegments[winIndex];
+                    if (seg.multiplier === 0) {
+                        playerPoints -= bet;
+                        document.getElementById('fortune-result').innerHTML = `${seg.label} ! <span style="color:red">Perdu -${bet}</span>`;
+                    } else {
+                        const winnings = Math.floor(bet * seg.multiplier);
+                        playerPoints += winnings - bet;
+                        const color = winnings >= bet ? 'lime' : 'orange';
+                        document.getElementById('fortune-result').innerHTML = `${seg.label} ! <span style="color:${color}">${winnings >= bet ? '+' : ''}${winnings - bet} pts</span>`;
+                    }
+                    updatePointsDisplay();
+                }
+            }
+            animateSpin();
+        }
+
+        // ==============================
+        // === VIDEO POKER ===
+        // ==============================
+        let vpDeck = [];
+        let vpHand = [];
+        let vpHeld = [];
+        let vpBet = 0;
+        let vpPhase = 'idle'; // idle, deal, draw
+
+        function createVPDeck() {
+            const suits = ['♠', '♥', '♦', '♣'];
+            const values = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A'];
+            const deck = [];
+            for (const s of suits) {
+                for (const v of values) {
+                    deck.push({ suit: s, value: v });
+                }
+            }
+            return deck.sort(() => Math.random() - 0.5);
+        }
+
+        function vpCardRank(card) {
+            const order = ['2','3','4','5','6','7','8','9','10','J','Q','K','A'];
+            return order.indexOf(card.value);
+        }
+
+        function startVideoPoker() {
+            vpBet = parseInt(document.getElementById('vp-bet').value) || 0;
+            if (vpBet <= 0 || vpBet > playerPoints) { alert('Mise invalide !'); return; }
+
+            vpDeck = createVPDeck();
+            vpHand = [vpDeck.pop(), vpDeck.pop(), vpDeck.pop(), vpDeck.pop(), vpDeck.pop()];
+            vpHeld = [false, false, false, false, false];
+            vpPhase = 'deal';
+            document.getElementById('vp-draw-btn').disabled = false;
+            document.getElementById('vp-result').textContent = 'Clique sur les cartes à garder, puis "Tirer"';
+            renderVPHand();
+        }
+
+        function renderVPHand() {
+            const container = document.getElementById('vp-hand');
+            container.innerHTML = '';
+            vpHand.forEach((card, i) => {
+                const el = document.createElement('div');
+                el.className = 'poker-card' + (vpHeld[i] ? ' held' : '');
+                const isRed = ['♥', '♦'].includes(card.suit);
+                el.style.color = isRed ? '#e74c3c' : '#2c3e50';
+                el.innerHTML = `
+                    ${vpHeld[i] ? '<span class="held-badge">GARDÉ</span>' : ''}
+                    <span style="font-size:0.8em;">${card.suit}</span>
+                    <span>${card.value}</span>
+                    <span style="font-size:0.8em;">${card.suit}</span>
+                `;
+                if (vpPhase === 'deal') {
+                    el.onclick = () => {
+                        vpHeld[i] = !vpHeld[i];
+                        renderVPHand();
+                    };
+                }
+                container.appendChild(el);
+            });
+        }
+
+        function vpDraw() {
+            if (vpPhase !== 'deal') return;
+            vpPhase = 'draw';
+            document.getElementById('vp-draw-btn').disabled = true;
+
+            // Replace non-held cards
+            for (let i = 0; i < 5; i++) {
+                if (!vpHeld[i] && vpDeck.length > 0) {
+                    vpHand[i] = vpDeck.pop();
+                }
+            }
+            renderVPHand();
+
+            // Evaluate hand
+            const result = evaluatePokerHand(vpHand);
+            if (result.multiplier > 0) {
+                const winnings = Math.floor(vpBet * result.multiplier);
+                playerPoints += winnings - vpBet;
+                document.getElementById('vp-result').innerHTML = `${result.name} ! <span style="color:lime">+${winnings} pts (x${result.multiplier})</span>`;
+            } else {
+                playerPoints -= vpBet;
+                document.getElementById('vp-result').innerHTML = `<span style="color:red">${result.name} — Perdu -${vpBet}</span>`;
+            }
+            updatePointsDisplay();
+            vpPhase = 'idle';
+        }
+
+        function evaluatePokerHand(hand) {
+            const ranks = hand.map(c => vpCardRank(c)).sort((a, b) => a - b);
+            const suits = hand.map(c => c.suit);
+            const rankCounts = {};
+            ranks.forEach(r => { rankCounts[r] = (rankCounts[r] || 0) + 1; });
+            const counts = Object.values(rankCounts).sort((a, b) => b - a);
+
+            const isFlush = suits.every(s => s === suits[0]);
+            const isStraight = (ranks[4] - ranks[0] === 4 && new Set(ranks).size === 5)
+                || (ranks.join(',') === '0,1,2,3,12'); // A-2-3-4-5
+
+            if (isFlush && isStraight) return { name: '🌟 Quinte Flush', multiplier: 50 };
+            if (counts[0] === 4) return { name: '💥 Carré', multiplier: 25 };
+            if (counts[0] === 3 && counts[1] === 2) return { name: '🏠 Full House', multiplier: 10 };
+            if (isFlush) return { name: '🎨 Couleur', multiplier: 8 };
+            if (isStraight) return { name: '📏 Suite', multiplier: 5 };
+            if (counts[0] === 3) return { name: '🔱 Brelan', multiplier: 3 };
+            if (counts[0] === 2 && counts[1] === 2) return { name: '✌️ Double Paire', multiplier: 2 };
+            if (counts[0] === 2) {
+                // Only Jacks or better pay
+                const pairRank = parseInt(Object.keys(rankCounts).find(k => rankCounts[k] === 2));
+                if (pairRank >= 9) return { name: '👑 Paire (Valets+)', multiplier: 1 };
+                return { name: 'Paire basse', multiplier: 0 };
+            }
+            return { name: 'Rien', multiplier: 0 };
+        }
+
+        // ==============================
+        // === DRAGON TOWER ===
+        // ==============================
+        let towerRows = 8;
+        let towerCols = 3;
+        let towerDangerCells = []; // Array of arrays, one per row
+        let towerCurrentRow = 0;
+        let towerRunning = false;
+        let towerBet = 0;
+        let towerMultiplier = 1;
+        let towerRevealed = []; // Array of arrays
+
+        function startTower() {
+            towerBet = parseInt(document.getElementById('tower-bet').value) || 0;
+            if (towerBet <= 0 || towerBet > playerPoints) { alert('Mise invalide !'); return; }
+
+            towerRunning = true;
+            towerCurrentRow = 0;
+            towerMultiplier = 1;
+            towerDangerCells = [];
+            towerRevealed = [];
+
+            // Each row has 1 danger cell out of 3
+            for (let r = 0; r < towerRows; r++) {
+                towerDangerCells.push(Math.floor(Math.random() * towerCols));
+                towerRevealed.push(Array(towerCols).fill(false));
+            }
+
+            document.getElementById('tower-multiplier').textContent = 'x1.00';
+            document.getElementById('tower-result').textContent = 'Choisis une colonne à chaque étage !';
+            document.getElementById('tower-cashout-btn').disabled = false;
+            renderTower();
+        }
+
+        function renderTower() {
+            const grid = document.getElementById('tower-grid');
+            grid.innerHTML = '';
+
+            for (let r = 0; r < towerRows; r++) {
+                const rowEl = document.createElement('div');
+                rowEl.className = 'tower-row';
+
+                for (let c = 0; c < towerCols; c++) {
+                    const cell = document.createElement('div');
+                    cell.className = 'tower-cell';
+
+                    if (towerRevealed[r][c]) {
+                        cell.classList.add('revealed');
+                        if (towerDangerCells[r] === c) {
+                            cell.classList.add('danger');
+                            cell.textContent = '🐉';
+                        } else {
+                            cell.classList.add('safe');
+                            cell.textContent = '💎';
+                        }
+                    } else if (r === towerCurrentRow && towerRunning) {
+                        cell.textContent = '▶';
+                        cell.onclick = () => pickTower(r, c);
+                    } else if (r < towerCurrentRow) {
+                        // Already passed safely
+                        cell.classList.add('safe');
+                        cell.classList.add('revealed');
+                        cell.textContent = towerRevealed[r][c] ? '💎' : '';
+                    } else {
+                        cell.textContent = '';
+                        cell.style.opacity = '0.5';
+                    }
+                    rowEl.appendChild(cell);
+                }
+                grid.appendChild(rowEl);
+            }
+        }
+
+        function pickTower(row, col) {
+            if (!towerRunning || row !== towerCurrentRow) return;
+
+            towerRevealed[row][col] = true;
+
+            if (towerDangerCells[row] === col) {
+                // Hit the dragon - reveal all danger cells
+                towerRunning = false;
+                for (let r = 0; r < towerRows; r++) {
+                    towerRevealed[r][towerDangerCells[r]] = true;
+                }
+                renderTower();
+                playerPoints -= towerBet;
+                updatePointsDisplay();
+                document.getElementById('tower-result').innerHTML = `<span style="color:red">🐉 Le dragon t'a trouvé ! -${towerBet}</span>`;
+                document.getElementById('tower-cashout-btn').disabled = true;
+            } else {
+                towerCurrentRow++;
+                towerMultiplier = parseFloat((1 + towerCurrentRow * 0.5).toFixed(2));
+                document.getElementById('tower-multiplier').textContent = `x${towerMultiplier.toFixed(2)}`;
+
+                if (towerCurrentRow >= towerRows) {
+                    cashoutTower();
+                } else {
+                    renderTower();
+                }
+            }
+        }
+
+        function cashoutTower() {
+            if (!towerRunning) return;
+            towerRunning = false;
+            const winnings = Math.floor(towerBet * towerMultiplier);
+            playerPoints += winnings - towerBet;
+            updatePointsDisplay();
+            document.getElementById('tower-result').innerHTML = `<span style="color:lime">💰 Retiré ! +${winnings} pts (x${towerMultiplier.toFixed(2)})</span>`;
+            document.getElementById('tower-cashout-btn').disabled = true;
+            // Reveal all
+            for (let r = 0; r < towerRows; r++) {
+                towerRevealed[r][towerDangerCells[r]] = true;
+            }
+            renderTower();
+        }
+
+        // ==============================
+        // === LIMBO ===
+        // ==============================
+        function playLimbo() {
+            const bet = parseInt(document.getElementById('limbo-bet').value) || 0;
+            let target = parseFloat(document.getElementById('limbo-target').value) || 2;
+            if (target < 1.1) target = 1.1;
+            if (bet <= 0 || bet > playerPoints) { alert('Mise invalide !'); return; }
+
+            const display = document.getElementById('limbo-display');
+            display.style.color = '#333';
+            display.textContent = '...';
+
+            // Generate result using house edge formula
+            // Result = 0.99 / random, capped for display
+            const raw = 0.99 / Math.random();
+            const result = Math.min(parseFloat(raw.toFixed(2)), 1000);
+
+            // Animation
+            let animSteps = 0;
+            const animInterval = setInterval(() => {
+                const fakeNum = (Math.random() * 10 + 1).toFixed(2);
+                display.textContent = `${fakeNum}x`;
+                animSteps++;
+                if (animSteps > 15) {
+                    clearInterval(animInterval);
+                    display.textContent = `${result.toFixed(2)}x`;
+
+                    if (result >= target) {
+                        const winnings = Math.floor(bet * target);
+                        playerPoints += winnings - bet;
+                        display.style.color = '#2ecc71';
+                        document.getElementById('limbo-result').innerHTML = `Objectif x${target.toFixed(1)} — Résultat x${result.toFixed(2)} <span style="color:lime">GAGNÉ +${winnings} !</span>`;
+                    } else {
+                        playerPoints -= bet;
+                        display.style.color = '#e74c3c';
+                        document.getElementById('limbo-result').innerHTML = `Objectif x${target.toFixed(1)} — Résultat x${result.toFixed(2)} <span style="color:red">PERDU -${bet}</span>`;
+                    }
+                    updatePointsDisplay();
+                }
+            }, 60);
         }
 
         startCheckers();
